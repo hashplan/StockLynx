@@ -13,8 +13,14 @@ class RosettaTrees extends Migration
     public function up()
     {
         Schema::table('rosetta_trees', function (Blueprint $table) {
-            //
+            $table->increments('id');
+            $table->string('name');
+            $table->string('comment');
+            $table->enum('status', array('ACTIVE','DELETED'))->index();
         });
+
+        $table_prefix = DB::getTablePrefix();
+        DB::statement("ALTER TABLE `" . $table_prefix . "rosetta_trees` CHANGE `status` `status` SET('ACTIVE','DELETED');");
     }
 
     /**
@@ -24,8 +30,6 @@ class RosettaTrees extends Migration
      */
     public function down()
     {
-        Schema::table('rosetta_trees', function (Blueprint $table) {
-            //
-        });
+        Schema::drop('rosetta_trees');
     }
 }

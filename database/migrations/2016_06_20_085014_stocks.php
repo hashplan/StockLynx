@@ -12,7 +12,19 @@ class Stocks extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('stocks', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('securityID', 30);
+            $table->string('ISIN', 12);
+            $table->string('CUSIP', 9);
+            $table->string('symbol', 10);
+            $table->string('exchange', 50);
+            $table->string('securityName', 300);
+            $table->string('securityType', 100);
+            $table->string('issuerID', 30);
+            $table->string('issuerName', 200)->nullable();
+            $table->timestamps();
+        });
     }
 
     /**
@@ -22,6 +34,6 @@ class Stocks extends Migration
      */
     public function down()
     {
-        //
+        Schema::drop('stocks');
     }
 }
