@@ -11,7 +11,7 @@
     <li class="dropdown user user-menu" style="margin-right: 20px;">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
             <img src="{{ $user->avatar_url_or_blank }}" class="user-image" />
-            <span class="hidden-xs">{{ $user->name }}</span>
+            <span class="hidden-xs">{{{ $user->name }}}</span>
         </a>
         <ul class="dropdown-menu">
             <!-- User image -->
