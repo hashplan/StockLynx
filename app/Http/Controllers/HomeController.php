@@ -31,13 +31,13 @@ class HomeController extends AdminController
     }
 
     /**
-     * Show the application brunch.
+     * Show the application branch.
      *
      * @return \Illuminate\Http\Response
      */
-    public function brunch()
+    public function branch()
     {
-        return (Auth::check())?$this->renderContent(view('brunch')):view('notloggedin');
+        return (Auth::check())?$this->renderContent(view('branch')):view('notloggedin');
     }
     /**
      * Show the application scenario.

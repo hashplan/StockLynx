@@ -8,7 +8,7 @@ Route::get('/information', ['as' => 'admin.information', function () {
 }]);
 
 Route::get('/tree', ['as' => 'admin.tree', 'uses' => '\App\Http\Controllers\HomeController@tree']);
-Route::get('/brunch', ['as' => 'admin.brunch', 'uses' => '\App\Http\Controllers\HomeController@brunch']);
+Route::get('/branch', ['as' => 'admin.brunch', 'uses' => '\App\Http\Controllers\HomeController@branch']);
 Route::get('/scenario', ['as' => 'admin.scenario', 'uses' => '\App\Http\Controllers\HomeController@scenario']);
 
 Route::post('/news/export.json', ['as' => 'admin.news.export', function () {

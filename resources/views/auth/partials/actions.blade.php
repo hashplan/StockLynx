@@ -10,7 +10,7 @@
                 <ul class="dropdown-menu">
                     <li class="dropdown-header">Tree</li>
                     <li><a href="/admin/tree">Create NEW Tree</a></li>
-                    <li><a href="/admin/brunch">Create NEW Brunch</a></li>
+                    <li><a href="/admin/branch">Create NEW Branch</a></li>
                     <li class="divider"></li>
                     <li class="dropdown-header">Scenario</li>
                     <li class="disabled"><a href="/admin/scenario">Create NEW Scenario</a></li>
