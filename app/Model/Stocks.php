@@ -41,4 +41,8 @@ class Stocks extends Model
 //        $this->stocks()->attach($contact);
     }
 
+    public function setCreatedAtAttribute($value)
+    {
+        // to Disable
+    }
 }
