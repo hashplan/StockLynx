@@ -15,10 +15,10 @@ class TreeCapitalization extends Migration
         Schema::create('tree_capitalization', function (Blueprint $table) {
             $table->increments('id');
             $table->enum('type_capitalization', array('Outstanding','Option','ConvertibleBond','RSU (unvested)','Reduction (for Buyback)'))->index();
-            $table->bigInteger('shares', 20)->unsigned();
-            $table->bigInteger('debt_value', 20)->unsigned();
-            $table->bigInteger('cash_value', 20)->unsigned();
-            $table->bigInteger('exercise_price', 20)->unsigned();
+            $table->bigInteger('shares')->length(20)->unsigned();
+            $table->bigInteger('debt_value')->length(20)->unsigned();
+            $table->bigInteger('cash_value')->length(20)->unsigned();
+            $table->bigInteger('exercise_price')->length(20)->unsigned();
         });
 
         $table_prefix = DB::getTablePrefix();
