@@ -12,7 +12,7 @@ class RosettaTrees extends Migration
      */
     public function up()
     {
-        Schema::table('rosetta_trees', function (Blueprint $table) {
+        Schema::create('rosetta_trees', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
             $table->string('comment');

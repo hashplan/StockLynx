@@ -12,7 +12,7 @@ class ValuationTree extends Migration
      */
     public function up()
     {
-        Schema::table('valuation_tree', function (Blueprint $table) {
+        Schema::create('valuation_tree', function (Blueprint $table) {
             $table->bigInteger('user_id', 20);
             $table->bigInteger('tree_id', 20);
             $table->bigInteger('scenario_id', 20);

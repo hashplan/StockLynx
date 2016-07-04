@@ -12,7 +12,7 @@ class TreeCapitalization extends Migration
      */
     public function up()
     {
-        Schema::table('tree_capitalization', function (Blueprint $table) {
+        Schema::create('tree_capitalization', function (Blueprint $table) {
             $table->increments('id');
             $table->enum('type_capitalization', array('Outstanding','Option','ConvertibleBond','RSU (unvested)','Reduction (for Buyback)'))->index();
             $table->bigInteger('shares', 20)->unsigned();
