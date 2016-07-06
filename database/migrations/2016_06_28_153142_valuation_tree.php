@@ -12,7 +12,7 @@ class ValuationTree extends Migration
      */
     public function up()
     {
-        Schema::create('valuation_tree', function (Blueprint $table) {
+        Schema::create('valuation_trees', function (Blueprint $table) {
             $table->bigInteger('user_id')->length(20)->unsigned();
             $table->bigInteger('tree_id')->length(20)->unsigned();
             $table->bigInteger('scenario_id')->length(20)->unsigned();
@@ -44,8 +44,8 @@ class ValuationTree extends Migration
         });
 
         $table_prefix = DB::getTablePrefix();
-        DB::statement("ALTER TABLE `" . $table_prefix . "valuation_tree` CHANGE `metric` `metric` SET('NULL','Net Income','EPS','EBITDA','Revenue','Levered FCF','Levered FCF per Share','Unlevered FCF','Dividend per Share');");
-        DB::statement("ALTER TABLE `" . $table_prefix . "valuation_tree` CHANGE `modifier` `modifier` SET('NULL','multiple','yield');");
+        DB::statement("ALTER TABLE `" . $table_prefix . "valuation_trees` CHANGE `metric` `metric` SET('NULL','Net Income','EPS','EBITDA','Revenue','Levered FCF','Levered FCF per Share','Unlevered FCF','Dividend per Share');");
+        DB::statement("ALTER TABLE `" . $table_prefix . "valuation_trees` CHANGE `modifier` `modifier` SET('NULL','multiple','yield');");
     }
 
     /**
@@ -55,6 +55,6 @@ class ValuationTree extends Migration
      */
     public function down()
     {
-        Schema::drop('valuation_tree');
+        Schema::drop('valuation_trees');
     }
 }

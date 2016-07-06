@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use Auth;
 use App\Http\Requests;
 use Illuminate\Http\Request;
+use SleepingOwl\Admin\Display\Extension\Tree;
 use SleepingOwl\Admin\Http\Controllers\AdminController;
+use SleepingOwl\Admin\Navigation\Page;
 
 class HomeController extends AdminController
 {

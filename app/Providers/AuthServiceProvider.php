@@ -20,7 +20,10 @@ class AuthServiceProvider extends ServiceProvider
         \App\Role::class => \App\Policies\RolePolicy::class,
         \App\Model\News::class => \App\Policies\NewsPolicy::class,
         \App\Model\Page::class => \App\Policies\PagesPolicy::class,
-        \App\Model\Stocks::class => \App\Policies\StocksPolicy::class
+        \App\Model\Stocks::class => \App\Policies\StocksPolicy::class,
+        \App\Model\RosettaTrees::class => \App\Policies\TreePolicy::class,
+        \App\Model\TreeCapitalization::class => \App\Policies\CapitalizationPolicy::class,
+        \App\Model\ValuationTree::class => \App\Policies\ValuationPolicy::class
     ];
 
     /**
