@@ -27,10 +27,10 @@ class HomeController extends AdminController
      *
      * @return \Illuminate\Http\Response
      */
-    public function tree()
-    {
-        return (Auth::check())?$this->renderContent(view('tree')):view('notloggedin');
-    }
+//    public function tree()
+//    {
+//        return (Auth::check())?$this->renderContent(view('tree')):view('notloggedin');
+//    }
 
     /**
      * Show the application branch.

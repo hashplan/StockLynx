@@ -4,7 +4,7 @@ namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
 
-class RosettaTrees extends Model
+class RosettaTree extends Model
 {
     protected $fillable = [
         'name',
@@ -31,7 +31,7 @@ class RosettaTrees extends Model
     public function setTreeIdAttribute($treeId)
     {
         $this->save();
-        $tree = RosettaTrees::find($treeId);
+        $tree = RosettaTree::find($treeId);
 //        $this->stocks()->attach($contact);
     }
 

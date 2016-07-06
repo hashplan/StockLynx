@@ -1,10 +1,10 @@
 <?php
 
-use App\Model\RosettaTrees;
+use App\Model\RosettaTree;
 use SleepingOwl\Admin\Model\ModelConfiguration;
 
 AdminSection::registerModel(RosettaTrees::class, function (ModelConfiguration $model) {
-    $model->setTitle('Tree')->setAlias('tree')->enableAccessCheck();
+    $model->setTitle('Trees')->setAlias('tree')->enableAccessCheck();
 
     // Display
     $model->onDisplay(function () {
@@ -38,7 +38,4 @@ AdminSection::registerModel(RosettaTrees::class, function (ModelConfiguration $m
 
 })->addMenuPage(RosettaTrees::class)->setIcon('fa fa-sitemap');
 
-AdminNavigation::addPage('tree');
-
-//SleepingOwl\Admin
-//$items = AdminNavigation::instance()->getMenu();
+AdminNavigation::addPage('trees');
