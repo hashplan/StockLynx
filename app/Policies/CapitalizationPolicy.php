@@ -4,6 +4,7 @@ namespace App\Policies;
 
 use App\User;
 use App\Model\TreeCapitalization;
+use Baum\Extensions\Eloquent\Model;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class CapitalizationPolicy
@@ -19,7 +20,7 @@ class CapitalizationPolicy
      */
     public function before(User $user, $ability, TreeCapitalization $item)
     {
-        return true;//(!$user->isSuperAdmin() && !$user->isManager())?true:false;
+        return ($user->isSuperAdmin())?true:false;
     }
 
     /**

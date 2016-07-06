@@ -19,7 +19,7 @@ class PagesPolicy
      */
     public function before(User $user, $ability, Page $item)
     {
-        return ($user->isSuperAdmin())?true:false;
+        return false;//($user->isSuperAdmin())?true:false;
     }
 
     /**

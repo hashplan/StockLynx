@@ -18,19 +18,8 @@ class HomeController extends AdminController
      */
     public function index()
     {
-
         return (Auth::check())?view('home'):view('notloggedin');
     }
-
-    /**
-     * Show the application tree.
-     *
-     * @return \Illuminate\Http\Response
-     */
-//    public function tree()
-//    {
-//        return (Auth::check())?$this->renderContent(view('tree')):view('notloggedin');
-//    }
 
     /**
      * Show the application branch.

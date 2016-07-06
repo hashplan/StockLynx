@@ -19,7 +19,7 @@ class ValuationPolicy
      */
     public function before(User $user, $ability, ValuationTree $item)
     {
-        return true;//(!$user->isSuperAdmin() && !$user->isManager())?true:false;
+        return (!$user->isSuperAdmin() && !$user->isManager())?true:false;
     }
 
     /**

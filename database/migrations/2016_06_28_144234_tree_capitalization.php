@@ -13,7 +13,7 @@ class TreeCapitalization extends Migration
     public function up()
     {
         Schema::create('tree_capitalizations', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigInteger('id')->length(20)->unsigned();
             $table->enum('type_capitalization', array('Outstanding','Option','ConvertibleBond','RSU (unvested)','Reduction (for Buyback)'))->index();
             $table->bigInteger('shares')->length(20)->unsigned();
             $table->bigInteger('debt_value')->length(20)->unsigned();
@@ -22,7 +22,7 @@ class TreeCapitalization extends Migration
         });
 
         $table_prefix = DB::getTablePrefix();
-        DB::statement("ALTER TABLE `" . $table_prefix . "tree_capitalizations` CHANGE `type_capitalization` `type_capitalization` SET('Outstanding','Option','ConvertibleBond','RSU (unvested)','Reduction (for Buyback)');");
+        DB::statement("ALTER TABLE `" . $table_prefix . "tree_capitalizations` CHANGE `type_capitalization` `type_capitalization` ENUM('Outstanding','Option','ConvertibleBond','RSU (unvested)','Reduction (for Buyback)');");
     }
 
     /**

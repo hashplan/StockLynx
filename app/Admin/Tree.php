@@ -3,30 +3,21 @@
 use App\Model\RosettaTree;
 use SleepingOwl\Admin\Model\ModelConfiguration;
 
-AdminSection::registerModel(RosettaTrees::class, function (ModelConfiguration $model) {
-    $model->setTitle('Trees')->setAlias('tree')->enableAccessCheck();
+AdminSection::registerModel(RosettaTree::class, function (ModelConfiguration $model) {
+    $model->setTitle('Tree')->setAlias('trees')->enableAccessCheck();
 
     // Display
     $model->onDisplay(function () {
-        $display = AdminDisplay::datatables()->setHtmlAttribute('class', 'table-warning');
-        $display->setOrder([[1, 'desc']]);
-
-        $display->setColumns([
-            AdminColumn::link('name')->setLabel('Title'),
-            AdminColumn::text('comment')->setLabel('Comment')->setWidth('150px'),
-            AdminColumn::select('status')->setLabel('Status')->setWidth('50px')->setHtmlAttribute('class', 'text-center')->setOrderable(false)
-        ]);
-
-        return $display;
+        return AdminDisplay::tree()->with('trees')->setValue('name');//->setValue('value')
     });
 
     // Create And Edit
     $model->onCreateAndEdit(function() {
         $form = AdminForm::panel()
             ->addBody([
-                AdminFormElement::text('name', 'Title')->required(),
-                AdminFormElement::wysiwyg('comment', 'Comment')->required(),
-                AdminFormElement::checkbox('status', 'Status'),
+                AdminFormElement::text('name', 'Title')->required()->addValidationRule('alpha_num')->addValidationRule('max:255'),
+                AdminFormElement::wysiwyg('comment', 'Comment')->required()->addValidationRule('max:255'),
+                AdminFormElement::select('status', 'Status', RosettaTree::getPossibleEnumValues('status')),
             ]);
 
         $form->getButtons()
@@ -36,6 +27,4 @@ AdminSection::registerModel(RosettaTrees::class, function (ModelConfiguration $m
         return $form;
     });
 
-})->addMenuPage(RosettaTrees::class)->setIcon('fa fa-sitemap');
-
-AdminNavigation::addPage('trees');
+})->addMenuPage(RosettaTree::class)->setIcon('fa fa-sitemap');

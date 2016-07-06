@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class ValuationTree extends Model
 {
+    public $timestamps = false;
+
     protected $fillable = [
         'user_id',
         'tree_id',

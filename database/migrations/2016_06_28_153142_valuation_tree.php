@@ -44,8 +44,8 @@ class ValuationTree extends Migration
         });
 
         $table_prefix = DB::getTablePrefix();
-        DB::statement("ALTER TABLE `" . $table_prefix . "valuation_trees` CHANGE `metric` `metric` SET('NULL','Net Income','EPS','EBITDA','Revenue','Levered FCF','Levered FCF per Share','Unlevered FCF','Dividend per Share');");
-        DB::statement("ALTER TABLE `" . $table_prefix . "valuation_trees` CHANGE `modifier` `modifier` SET('NULL','multiple','yield');");
+        DB::statement("ALTER TABLE `" . $table_prefix . "valuation_trees` CHANGE `metric` `metric` ENUM('NULL','Net Income','EPS','EBITDA','Revenue','Levered FCF','Levered FCF per Share','Unlevered FCF','Dividend per Share');");
+        DB::statement("ALTER TABLE `" . $table_prefix . "valuation_trees` CHANGE `modifier` `modifier` ENUM('NULL','multiple','yield');");
     }
 
     /**

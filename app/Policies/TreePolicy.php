@@ -3,7 +3,7 @@
 namespace App\Policies;
 
 use App\User;
-use App\Model\RosettaTrees;
+use App\Model\RosettaTree;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class TreePolicy
@@ -17,40 +17,40 @@ class TreePolicy
      *
      * @return bool
      */
-    public function before(User $user, $ability, RosettaTrees $item)
+    public function before(User $user, $ability, RosettaTree $item)
     {
-        return true;//(!$user->isSuperAdmin() && !$user->isManager())?true:false;
+        return (!$user->isSuperAdmin() && !$user->isManager())?true:false;
     }
 
     /**
      * @param User $user
-     * @param RosettaTrees $item
+     * @param RosettaTree $item
      *
      * @return bool
      */
-    public function display(User $user, RosettaTrees $item)
+    public function display(User $user, RosettaTree $item)
     {
         return true;
     }
 
     /**
      * @param User $user
-     * @param RosettaTrees $item
+     * @param RosettaTree $item
      *
      * @return bool
      */
-    public function edit(User $user, RosettaTrees $item)
+    public function edit(User $user, RosettaTree $item)
     {
         return true;//$item->id > 2;
     }
 
     /**
      * @param User $user
-     * @param RosettaTrees $item
+     * @param RosettaTree $item
      *
      * @return bool
      */
-    public function delete(User $user, RosettaTrees $item)
+    public function delete(User $user, RosettaTree $item)
     {
         return true;//$item->id > 2;
     }

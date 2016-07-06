@@ -19,7 +19,7 @@ class NewsPolicy
      */
     public function before(User $user, $ability, News $item)
     {
-            return ($user->isSuperAdmin() || $user->isManager())?true:false;
+        return ($user->isSuperAdmin() || $user->isManager())?true:false;
     }
 
     /**

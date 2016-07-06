@@ -12,10 +12,10 @@ AdminSection::registerModel(ValuationTree::class, function (ModelConfiguration $
         $display->setOrder([[1, 'desc']]);
 
         $display->setColumns([
-            AdminColumn::text('user_id')->setLabel('user_id'),
-            AdminColumn::text('tree_id')->setLabel('tree_id'),
-            AdminColumn::text('scenario_id')->setLabel('scenario_id'),
-            AdminColumn::text('identifier')->setLabel('identifier'),
+//            AdminColumn::text('user_id')->setLabel('user_id'),
+//            AdminColumn::text('tree_id')->setLabel('tree_id'),
+//            AdminColumn::text('scenario_id')->setLabel('scenario_id'),
+//            AdminColumn::text('identifier')->setLabel('identifier'),
             AdminColumn::text('class')->setLabel('class'),
             AdminColumn::text('framework')->setLabel('framework'),
             AdminColumn::text('level')->setLabel('level'),
@@ -49,6 +49,10 @@ AdminSection::registerModel(ValuationTree::class, function (ModelConfiguration $
     $model->onCreateAndEdit(function() {
         $form = AdminForm::panel()
             ->addBody([
+                AdminFormElement::hidden('user_id')->setDefaultValue(Auth::user()->getAttribute('id')),
+                AdminFormElement::hidden('tree_id')->setDefaultValue(Auth::user()->getAttribute('id')),
+                AdminFormElement::hidden('scenario_id')->setDefaultValue(Auth::user()->getAttribute('id')),
+                AdminFormElement::hidden('identifier')->setDefaultValue(Auth::user()->getAttribute('id')),
                 AdminFormElement::text('name', 'Title')->required(),
                 AdminFormElement::wysiwyg('comment', 'Comment')->required(),
                 AdminFormElement::checkbox('status', 'Status'),

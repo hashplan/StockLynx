@@ -21,7 +21,7 @@ class AuthServiceProvider extends ServiceProvider
         \App\Model\News::class => \App\Policies\NewsPolicy::class,
         \App\Model\Page::class => \App\Policies\PagesPolicy::class,
         \App\Model\Stocks::class => \App\Policies\StocksPolicy::class,
-        \App\Model\RosettaTrees::class => \App\Policies\TreePolicy::class,
+        \App\Model\RosettaTree::class => \App\Policies\TreePolicy::class,
         \App\Model\TreeCapitalization::class => \App\Policies\CapitalizationPolicy::class,
         \App\Model\ValuationTree::class => \App\Policies\ValuationPolicy::class
     ];
