@@ -3,7 +3,7 @@
 use App\Model\ValuationTree;
 use App\Model\RosettaTree;
 use SleepingOwl\Admin\Model\ModelConfiguration;
-dd(RosettaTree::all('name', 'id', 'depth'));
+
 AdminSection::registerModel(ValuationTree::class, function (ModelConfiguration $model) {
     $model->setTitle('Valuation')->setAlias('valuation')->enableAccessCheck();
 
