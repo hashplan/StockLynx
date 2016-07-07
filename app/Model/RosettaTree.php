@@ -17,6 +17,11 @@ class RosettaTree extends Node
         'status'
     ];
 
+    public function scopeLevel($query, $id)
+    {
+        $query->where('id', $id);
+    }
+
     public function scopeOwn($query)
     {
         $query->where('user_id', Auth::user()->id);
@@ -30,6 +35,7 @@ class RosettaTree extends Node
         {
             if(!Auth::guest()) {
                 $model->user_id = Auth::user()->id;
+//                $model->depth = ++RosettaTree::level($model->parent_id)->lists('depth')[0];
             }
         });
 
@@ -37,6 +43,7 @@ class RosettaTree extends Node
         {
             if(!Auth::guest()) {
                 $model->user_id = Auth::user()->id;
+//                $model->depth = ++RosettaTree::level($model->parent_id)->lists('depth')[0];
             }
         });
     }

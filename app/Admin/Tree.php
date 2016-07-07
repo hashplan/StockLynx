@@ -15,6 +15,7 @@ AdminSection::registerModel(RosettaTree::class, function (ModelConfiguration $mo
     $model->onCreateAndEdit(function() {
         $form = AdminForm::panel()
             ->addBody([
+                AdminFormElement::select('parent_id', 'Select Parent Node', RosettaTree::lists('name', 'id')->all())->required(),
                 AdminFormElement::text('name', 'Title')->required()->addValidationRule('alpha_num')->addValidationRule('max:255'),
                 AdminFormElement::wysiwyg('comment', 'Comment')->required()->addValidationRule('max:255'),
                 AdminFormElement::select('status', 'Status', RosettaTree::getPossibleEnumValues('status')),

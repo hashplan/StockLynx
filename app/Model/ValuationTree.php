@@ -54,6 +54,7 @@ class ValuationTree extends Model
         {
             if(!Auth::guest()) {
                 $model->user_id = Auth::user()->id;
+                $model->level = RosettaTree::level($model->tree_id)->lists('depth')[0];
             }
         });
 
@@ -61,6 +62,7 @@ class ValuationTree extends Model
         {
             if(!Auth::guest()) {
                 $model->user_id = Auth::user()->id;
+                $model->level = RosettaTree::level($model->tree_id)->lists('depth')[0];
             }
         });
     }
