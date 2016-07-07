@@ -17,12 +17,12 @@ class ValuationTree extends Migration
             $table->bigInteger('tree_id')->length(20)->unsigned();
             $table->bigInteger('scenario_id')->length(20)->unsigned();
             $table->bigInteger('identifier')->length(20)->unsigned();
-            $table->string('class', 30);
-            $table->string('framework', 20);
+            $table->enum('class', array('Equity','Credit','Option'))->index();
+            $table->enum('framework', array('Fundamental','Merger Arbitrage','Volatility Arbitrage','Distressed','Catalyst'))->index();
             $table->integer('level')->length(3)->unsigned();
             $table->string('scenario_name', 35);
             $table->string('scenario_comment', 300)->nullable();
-            $table->string('valuation_method', 30);
+            $table->enum('valuation_method', array('custom', 'multiple', 'yield'))->index();
             $table->string('valuation_date', 30)->nullable();
             $table->enum('metric', array('NULL','Net Income','EPS','EBITDA','Revenue','Levered FCF','Levered FCF per Share','Unlevered FCF','Dividend per Share'))->index();
             $table->string('metric_comment', 300)->nullable();
@@ -30,7 +30,7 @@ class ValuationTree extends Migration
             $table->string('modifier_comment', 300)->nullable();
             $table->bigInteger('cash')->length(20)->unsigned()->nullable();
             $table->string('cash_comment', 300)->nullable();
-            $table->bigInteger('debt')->length(30)->unsigned()->nullable();
+            $table->enum('debt', array('Current Portion', 'Long-term Portion', 'Minority Interest'))->index();
             $table->string('debt_comment', 300)->nullable();
             $table->bigInteger('ev')->length(20)->nullable();
             $table->bigInteger('mkt_cap')->length(20)->nullable();
@@ -44,8 +44,12 @@ class ValuationTree extends Migration
         });
 
         $table_prefix = DB::getTablePrefix();
+        DB::statement("ALTER TABLE `" . $table_prefix . "valuation_trees` CHANGE `class` `class` ENUM('Equity','Credit','Option');");
+        DB::statement("ALTER TABLE `" . $table_prefix . "valuation_trees` CHANGE `framework` `framework` ENUM('Fundamental','Merger Arbitrage','Volatility Arbitrage','Distressed','Catalyst');");
+        DB::statement("ALTER TABLE `" . $table_prefix . "valuation_trees` CHANGE `valuation_method` `valuation_method` ENUM('custom', 'multiple', 'yield');");
         DB::statement("ALTER TABLE `" . $table_prefix . "valuation_trees` CHANGE `metric` `metric` ENUM('NULL','Net Income','EPS','EBITDA','Revenue','Levered FCF','Levered FCF per Share','Unlevered FCF','Dividend per Share');");
         DB::statement("ALTER TABLE `" . $table_prefix . "valuation_trees` CHANGE `modifier` `modifier` ENUM('NULL','multiple','yield');");
+        DB::statement("ALTER TABLE `" . $table_prefix . "valuation_trees` CHANGE `debt` `debt` ENUM('Current Portion', 'Long-term Portion', 'Minority Interest');");
     }
 
     /**

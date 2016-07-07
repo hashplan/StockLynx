@@ -3,6 +3,8 @@
 namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
+use Auth;
+use DB;
 
 class ValuationTree extends Model
 {
@@ -39,27 +41,44 @@ class ValuationTree extends Model
         'valuation_comment'
     ];
 
-    public function valuations()
+    public function scopeOwn($query)
     {
-//        return $this->belongsToMany(Contact::class);
+        $query->where('user_id', Auth::user()->id);
     }
 
-//    public function scopeWithContact($query, $stockId)
-//    {
-//        $query->whereHas('contacts', function ($q) use ($stockId) {
-//            $q->where('contact_id', $stockId);
-//        });
-//    }
-
-    public function setValuationIdAttribute($valuationId)
+    public static function boot()
     {
-        $this->save();
-        $tree = ValuationTree::find($valuationId);
-//        $this->stocks()->attach($contact);
+        parent::boot();
+
+        static::creating(function($model)
+        {
+            if(!Auth::guest()) {
+                $model->user_id = Auth::user()->id;
+            }
+        });
+
+        static::updating(function($model)
+        {
+            if(!Auth::guest()) {
+                $model->user_id = Auth::user()->id;
+            }
+        });
     }
 
-    public function setCreatedAtAttribute($value)
+    public function trees()
     {
-        // to Disable
+        return $this->hasMany(RosettaTree::class, 'id');//$this->belongsTo(Stocks::class);
+    }
+
+    public static function getPossibleEnumValues($name){
+        $instance = new static; // create an instance of the model to be able to get the table name
+        $type = DB::select( DB::raw('SHOW COLUMNS FROM '.$instance->getTable().' WHERE Field = "'.$name.'"') )[0]->Type;
+        preg_match('/^enum\((.*)\)$/', $type, $matches);
+        $enum = array();
+        foreach(explode(',', $matches[1]) as $value){
+            $v = trim( $value, "'" );
+            $enum[$v] = $v;
+        }
+        return $enum;
     }
 }

@@ -6,14 +6,14 @@
         <div class="col-md-12">
             <!--Warning buttons with dropdown menu-->
             <div class="btn-group">
-                <button type="button" data-toggle="dropdown" class="btn btn-warning dropdown-toggle">Action &nbsp;&nbsp;&nbsp;<span class="caret"></span></button>
+                <button type="button" data-toggle="dropdown" class="btn btn-warning dropdown-toggle">Action with&nbsp;&nbsp;&nbsp;<span class="caret"></span></button>
                 <ul class="dropdown-menu">
                     <li class="dropdown-header">Tree</li>
-                    <li><a href="/admin/tree">Create NEW Tree</a></li>
-                    <li><a href="/admin/branch">Create NEW Branch</a></li>
+                    <li><a href="/admin/trees">Tree</a></li>
+                    {{--<li><a href="/admin/branch">Create NEW Branch</a></li>--}}
                     <li class="divider"></li>
                     <li class="dropdown-header">Scenario</li>
-                    <li class="disabled"><a href="/admin/scenario">Create NEW Scenario</a></li>
+                    <li class="disabled"><a href="/admin/valuation">Scenario | Node</a></li>
                 </ul>
             </div>
         </div>

@@ -4,6 +4,7 @@ namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
 use Baum\Node;
+use Auth;
 use DB;
 
 class RosettaTree extends Node
@@ -16,32 +17,33 @@ class RosettaTree extends Node
         'status'
     ];
 
-//    protected $hidden = [
-//        'updated_at'
-//    ];
+    public function scopeOwn($query)
+    {
+        $query->where('user_id', Auth::user()->id);
+    }
+
+    public static function boot()
+    {
+        parent::boot();
+
+        static::creating(function($model)
+        {
+            if(!Auth::guest()) {
+                $model->user_id = Auth::user()->id;
+            }
+        });
+
+        static::updating(function($model)
+        {
+            if(!Auth::guest()) {
+                $model->user_id = Auth::user()->id;
+            }
+        });
+    }
 
     public function trees()
     {
         return $this->hasMany(ValuationTree::class, 'tree_id');//$this->belongsTo(Stocks::class);
-    }
-
-//    public function scopeWithContact($query, $stockId)
-//    {
-//        $query->whereHas('contacts', function ($q) use ($stockId) {
-//            $q->where('contact_id', $stockId);
-//        });
-//    }
-
-    public function setTreeIdAttribute($treeId)
-    {
-        $this->save();
-        $tree = RosettaTree::find($treeId);
-//        $this->stocks()->attach($contact);
-    }
-
-    public function setCreatedAtAttribute($value)
-    {
-        // to Disable
     }
 
     public static function getPossibleEnumValues($name){

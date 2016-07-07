@@ -25,26 +25,31 @@ class TreeCapitalization extends Model
 
     public function trees()
     {
-        return $this->hasMany(RosettaTree::class, 'id', 'id');
+        return $this->hasOne(RosettaTree::class, 'id', 'id');
     }
 
-//    public function scopeWithContact($query, $stockId)
-//    {
-//        $query->whereHas('contacts', function ($q) use ($stockId) {
-//            $q->where('contact_id', $stockId);
-//        });
-//    }
-
-    public function setCapitalizationIdAttribute($capitalizationId)
+    public function scopeOwn($query)
     {
-        $this->save();
-        $tree = TreeCapitalization::find($capitalizationId);
-//        $this->stocks()->attach($contact);
+        $query->where('user_id', Auth::user()->id);
     }
 
-    public function setCreatedAtAttribute($value)
+    public static function boot()
     {
-        // to Disable
+        parent::boot();
+
+        static::creating(function($model)
+        {
+            if(!Auth::guest()) {
+                $model->user_id = Auth::user()->id;
+            }
+        });
+
+        static::updating(function($model)
+        {
+            if(!Auth::guest()) {
+                $model->user_id = Auth::user()->id;
+            }
+        });
     }
 
     public static function getPossibleEnumValues($name){

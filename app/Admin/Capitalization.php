@@ -13,7 +13,7 @@ AdminSection::registerModel(TreeCapitalization::class, function (ModelConfigurat
         $display->setOrder([[1, 'desc']]);
 
         $display->setColumns([
-            AdminColumn::link('name')->setLabel('Tree Name')->setWidth('250px'),
+            AdminColumn::link('trees.name')->setLabel('Tree Name')->setWidth('250px'),
             AdminColumn::text('type_capitalization')->setLabel('Type')->setWidth('250px'),
             AdminColumn::text('shares')->setLabel('Shares')->setWidth('30px'),
             AdminColumn::text('debt_value')->setLabel('Debt')->setWidth('30px'),

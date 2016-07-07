@@ -27,4 +27,4 @@ AdminSection::registerModel(RosettaTree::class, function (ModelConfiguration $mo
         return $form;
     });
 
-})->addMenuPage(RosettaTree::class)->setIcon('fa fa-sitemap');
+});//->addMenuPage(RosettaTree::class)->setIcon('fa fa-sitemap');
