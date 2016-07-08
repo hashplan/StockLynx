@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Model;
 use SleepingOwl\Admin\Contracts\DisplayInterface;
 use SleepingOwl\Admin\Contracts\FormInterface;
 use SleepingOwl\Admin\Contracts\RepositoryInterface;
+use Request;
 
 /**
  * @method bool creating(Closure $callback)
@@ -662,7 +663,7 @@ class ModelConfiguration
     {
         array_unshift($parameters, $this->getAlias());
 
-        return route('admin.model', $parameters);
+        return route('admin.model', $parameters + Request::all());
     }
 
     /**
@@ -682,7 +683,7 @@ class ModelConfiguration
      */
     public function getStoreUrl()
     {
-        return route('admin.model.store', $this->getAlias());
+        return route('admin.model.store', $this->getAlias() + Request::all());
     }
 
     /**
@@ -692,7 +693,7 @@ class ModelConfiguration
      */
     public function getEditUrl($id)
     {
-        return route('admin.model.edit', [$this->getAlias(), $id]);
+        return route('admin.model.edit', [$this->getAlias(), $id] + Request::all());
     }
 
     /**
@@ -702,7 +703,7 @@ class ModelConfiguration
      */
     public function getUpdateUrl($id)
     {
-        return route('admin.model.update', [$this->getAlias(), $id]);
+        return route('admin.model.update', [$this->getAlias(), $id] + Request::all());
     }
 
     /**
@@ -712,7 +713,7 @@ class ModelConfiguration
      */
     public function getDeleteUrl($id)
     {
-        return route('admin.model.destroy', [$this->getAlias(), $id]);
+        return route('admin.model.destroy', [$this->getAlias(), $id] + Request::all());
     }
 
     /**
@@ -722,7 +723,7 @@ class ModelConfiguration
      */
     public function getRestoreUrl($id)
     {
-        return route('admin.model.restore', [$this->getAlias(), $id]);
+        return route('admin.model.restore', [$this->getAlias(), $id] + Request::all());
     }
 
     /**

@@ -3,7 +3,7 @@
 namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
-
+use Auth;
 class Stocks extends Model
 {
     protected $fillable = [
@@ -22,27 +22,12 @@ class Stocks extends Model
         'updated_at'
     ];
 
-    public function stocks()
+    public function scopeRest($query)
     {
-//        return $this->belongsToMany(Contact::class);
-    }
-
-//    public function scopeWithContact($query, $stockId)
-//    {
-//        $query->whereHas('contacts', function ($q) use ($stockId) {
-//            $q->where('contact_id', $stockId);
-//        });
-//    }
-
-    public function setStocksIdAttribute($stockId)
-    {
-        $this->save();
-        $contact = Stocks::find($stockId);
-//        $this->stocks()->attach($contact);
-    }
-
-    public function setCreatedAtAttribute($value)
-    {
-        // to Disable
+        $query->whereNotIn('id', function($query) {
+            $query->from('user_stocks')
+                ->select('stock_id')
+                ->where('user_id', '=', Auth::user()->id);
+        });
     }
 }

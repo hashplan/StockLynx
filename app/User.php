@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Model\Contact;
+use App\Model\Stocks;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use KodiComponents\Support\Upload;
 use Illuminate\Http\UploadedFile;
@@ -40,7 +41,11 @@ class User extends Authenticatable
     protected $casts = [
         'avatar' => 'image',
     ];
-    
+
+    public function stocks()
+    {
+        return $this->belongsToMany(Stocks::class, 'user_stocks', 'user_id', 'stock_id');
+    }
     /**
      * @return array
      */
