@@ -8,7 +8,7 @@ AdminSection::registerModel(Stocks::class, function (ModelConfiguration $model) 
 
     // Display
     $model->onDisplay(function () {
-        $display = AdminDisplay::datatables()->setColumns([
+        $display = AdminDisplay::datatables()->with('tree')->setColumns([
             AdminColumn::link('securityName')->setLabel('Title')->setWidth('300px'),
             AdminColumn::text('securityType')->setLabel('Type')->setHtmlAttribute('class', 'text-muted'),
             AdminColumn::text('securityID')->setLabel('ID')->setHtmlAttribute('class', 'text-muted'),

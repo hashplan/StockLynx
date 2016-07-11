@@ -675,7 +675,7 @@ class ModelConfiguration
     {
         array_unshift($parameters, $this->getAlias());
 
-        return route('admin.model.create', $parameters);
+        return route('admin.model.create', $parameters + Request::all());
     }
 
     /**
@@ -683,7 +683,7 @@ class ModelConfiguration
      */
     public function getStoreUrl()
     {
-        return route('admin.model.store', $this->getAlias() + Request::all());
+        return route('admin.model.store', [$this->getAlias()] + Request::all());
     }
 
     /**

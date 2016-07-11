@@ -50,8 +50,8 @@ AdminSection::registerModel(ValuationTree::class, function (ModelConfiguration $
                 AdminFormElement::hidden('user_id')->setDefaultValue(Auth::user()->getAttribute('id')),
                 AdminFormElement::hidden('scenario_id')->setDefaultValue(Auth::user()->getAttribute('id')),
                 AdminFormElement::hidden('identifier')->setDefaultValue(Auth::user()->getAttribute('id')),
-
-                AdminFormElement::select('tree_id', 'Select Node', RosettaTree::own()->lists('name', 'id')->all())->required(),
+                AdminFormElement::hidden('tree_id')->setDefaultValue(\Request::get('node_id')),
+                //AdminFormElement::select('tree_id', 'Select Node', RosettaTree::own()->lists('name', 'id')->all())->required(),
                 AdminFormElement::select('class', 'Class', ValuationTree::getPossibleEnumValues('class')),//['Equity','Credit','Option']
                 AdminFormElement::select('framework', 'Framework', ValuationTree::getPossibleEnumValues('framework')),//['Fundamental','Merger Arbitrage','Volatility Arbitrage','Distressed','Catalyst']
 //                AdminFormElement::text('level', 'level'),//level of the node

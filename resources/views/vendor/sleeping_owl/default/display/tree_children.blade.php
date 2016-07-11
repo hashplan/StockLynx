@@ -1,4 +1,5 @@
 @foreach ($children as $entry)
+    @if($entry->stock_id == \Request::get('stock_id'))
     <li class="dd-item dd3-item {{ $reorderable ? '' : 'dd3-not-reorderable' }}" data-id="{{{ $entry->id }}}">
         @if ($reorderable)
             <div class="dd-handle dd3-handle"></div>
@@ -10,6 +11,8 @@
             <div class="pull-right">
                 @if(is_a($entry, 'App\Model\RosettaTree'))
                 <a class="btn btn-default btn-xs"><span class="fa fa-search-plus"></span></a>
+                <a href="/admin/trees/create?stock_id={{$entry->stock_id}}&node_id={{$entry->id}}" class="btn btn-default btn-xs"><span class="fa fa-plus"></span></a>
+                <a href="/admin/valuation/create?stock_id={{$entry->stock_id}}&node_id={{$entry->id}}" class="btn btn-default btn-xs"><span class="fa fa-tree"></span></a>
                 @endif
 
                 @foreach ($controls as $control)
@@ -27,4 +30,5 @@
             </ol>
         @endif
     </li>
+    @endif
 @endforeach

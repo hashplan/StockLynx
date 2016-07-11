@@ -30,4 +30,5 @@ class Stocks extends Model
                 ->where('user_id', '=', Auth::user()->id);
         });
     }
+
 }
