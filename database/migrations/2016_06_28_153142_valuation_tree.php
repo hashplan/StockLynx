@@ -13,6 +13,7 @@ class ValuationTree extends Migration
     public function up()
     {
         Schema::create('valuation_trees', function (Blueprint $table) {
+            $table->increments('id');
             $table->bigInteger('user_id')->length(20)->unsigned();
             $table->bigInteger('tree_id')->length(20)->unsigned();
             $table->bigInteger('scenario_id')->length(20)->unsigned();

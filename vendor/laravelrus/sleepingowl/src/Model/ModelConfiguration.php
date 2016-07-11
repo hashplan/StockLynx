@@ -663,7 +663,7 @@ class ModelConfiguration
     {
         array_unshift($parameters, $this->getAlias());
 
-        return route('admin.model', $parameters + Request::all());
+        return route('admin.model', $parameters);
     }
 
     /**
@@ -675,7 +675,7 @@ class ModelConfiguration
     {
         array_unshift($parameters, $this->getAlias());
 
-        return route('admin.model.create', $parameters + Request::all());
+        return route('admin.model.create', $parameters);
     }
 
     /**

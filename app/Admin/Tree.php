@@ -8,16 +8,22 @@ AdminSection::registerModel(RosettaTree::class, function (ModelConfiguration $mo
 
     // Display
     $model->onDisplay(function () {
-        return AdminDisplay::tree()->with('trees')->setValue('name');//->setValue('value')
+        $display = AdminDisplay::tree()->setValue('name');//->setValue('value')
+
+        $display->getScopes()->push('stock');
+        $display->getScopes()->push('own');
+
+        return $display;
     });
 
     // Create And Edit
     $model->onCreateAndEdit(function() {
+        $parent = (\Request::has('node_id'))?\Request::get('node_id'):null;
         $form = AdminForm::panel()
             ->addBody([
                 //AdminFormElement::select('parent_id', 'Select Parent Node', RosettaTree::own()->lists('name', 'id')->all()),
                 AdminFormElement::hidden('stock_id')->setDefaultValue(\Request::get('stock_id')),
-                AdminFormElement::hidden('parent_id')->setDefaultValue(\Request::get('node_id')),//RosettaTree::own()->lists('name', 'id')->all()
+                ($parent)?AdminFormElement::hidden('parent_id')->setDefaultValue($parent):'',//RosettaTree::own()->lists('name', 'id')->all()
                 AdminFormElement::text('name', 'Title')->required()->addValidationRule('alpha_num')->addValidationRule('max:255'),
                 AdminFormElement::wysiwyg('comment', 'Comment')->required()->addValidationRule('max:255'),
                 AdminFormElement::select('status', 'Status', RosettaTree::getPossibleEnumValues('status')),

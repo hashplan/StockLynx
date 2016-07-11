@@ -1,5 +1,5 @@
 @foreach ($children as $entry)
-    @if($entry->stock_id == \Request::get('stock_id'))
+
     <li class="dd-item dd3-item {{ $reorderable ? '' : 'dd3-not-reorderable' }}" data-id="{{{ $entry->id }}}">
         @if ($reorderable)
             <div class="dd-handle dd3-handle"></div>
@@ -30,5 +30,5 @@
             </ol>
         @endif
     </li>
-    @endif
+
 @endforeach

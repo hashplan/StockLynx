@@ -9,7 +9,7 @@ AdminSection::registerModel(ValuationTree::class, function (ModelConfiguration $
 
     // Display
     $model->onDisplay(function () {
-        $display = AdminDisplay::datatables()->with('trees')->setHtmlAttribute('class', 'table-warning');
+        $display = AdminDisplay::datatables()->setHtmlAttribute('class', 'table-warning');
         $display->setOrder([[1, 'desc']]);
 
         $display->setColumns([

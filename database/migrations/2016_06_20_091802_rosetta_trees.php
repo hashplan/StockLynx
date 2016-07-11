@@ -16,7 +16,7 @@ class RosettaTrees extends Migration
             $table->increments('id');
             $table->integer('user_id')->length(10)->unsigned();
             $table->integer('stock_id')->length(10)->unsigned();
-            $table->bigInteger('parent_id')->length(20)->unsigned()->nullable()->default(0);
+            $table->bigInteger('parent_id')->length(20)->unsigned()->nullable();
             $table->string('name');
             $table->string('comment');
             $table->enum('status', array('ACTIVE','DELETED'))->index();

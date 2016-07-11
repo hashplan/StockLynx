@@ -27,9 +27,9 @@ class RosettaTree extends Node
         $query->where('user_id', Auth::user()->id);
     }
 
-    public function scopeStock($query, $id)
+    public function scopeStock($query)
     {
-        $query->where('stock_id', $id);
+        $query->where('stock_id', \Request::get('stock_id'));
     }
 
     public static function boot()
