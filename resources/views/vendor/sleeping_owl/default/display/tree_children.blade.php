@@ -48,19 +48,26 @@
             <ul class="list-group valuation_items">
             @foreach(App\Model\ValuationTree::byNode($entry->id)->get() as $valuation)
                 <li class="list-group-item">
-                    <span class="fa fa-money"></span>
-                    &nbsp;&nbsp;&nbsp;
-                    {{$valuation->scenario_name}} | {{$valuation->class}} | {{$valuation->framework}} | {{$valuation->valuation_method}} | {{$valuation->metric}} | {{$valuation->modifier}}
-                    <div class="pull-right">
-                        <a class="btn btn-default btn-xs" data-toggle="modal" data-target="#valuation_{{$valuation->id}}"><span class="fa fa-search-plus"></span> Details</a>
-                        <a href="/admin/valuation/{{$valuation->id}}/edit?stock_id={{$entry->stock_id}}&node_id={{$entry->id}}" class="btn btn-default btn-xs"><span class="fa fa-pencil"></span></a>
-                        <form action="/admin/valuation/{{$valuation->id}}/delete?stock_id={{$entry->stock_id}}" method="POST" style="display:inline-block;">
-                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                            <input type="hidden" name="_method" value="DELETE">
-                            <button class="btn btn-danger btn-xs btn-delete" data-toggle="tooltip" title="" data-original-title="Delete">
-                                <i class="fa fa-times"></i>
-                            </button>
-                        </form>
+                    <div class="row">
+                        <div class="col-md-5 pull-left"><span class="fa fa-money"></span>&nbsp;&nbsp;&nbsp;{{$valuation->scenario_name}}</div>
+                        <div class="col-md-1">{{$valuation->class}}</div>
+                        <div class="col-md-1">{{$valuation->framework}}</div>
+                        <div class="col-md-1">{{$valuation->valuation_method}}</div>
+                        <div class="col-md-1">{{$valuation->metric}}</div>
+                        <div class="col-md-1">{{$valuation->modifier}}</div>
+                        <div class="col-md-2">
+                            <div class="pull-right">
+                            <a class="btn btn-default btn-xs" data-toggle="modal" data-target="#valuation_{{$valuation->id}}"><span class="fa fa-search-plus"></span> Details</a>
+                            <a href="/admin/valuation/{{$valuation->id}}/edit?stock_id={{$entry->stock_id}}&node_id={{$entry->id}}" class="btn btn-default btn-xs"><span class="fa fa-pencil"></span></a>
+                            <form action="/admin/valuation/{{$valuation->id}}/delete?stock_id={{$entry->stock_id}}" method="POST" style="display:inline-block;">
+                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                <input type="hidden" name="_method" value="DELETE">
+                                <button class="btn btn-danger btn-xs btn-delete" data-toggle="tooltip" title="" data-original-title="Delete">
+                                    <i class="fa fa-times"></i>
+                                </button>
+                            </form>
+                            </div>
+                        </div>
                     </div>
                     <div class="modal fade" id="valuation_{{$valuation->id}}" tabindex="-1" role="dialog" aria-labelledby="valuation_{{$valuation->id}}">
                         <div class="modal-dialog" role="document">
