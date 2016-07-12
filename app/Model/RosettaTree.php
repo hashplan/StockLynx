@@ -24,12 +24,13 @@ class RosettaTree extends Node
 
     public function scopeOwn($query)
     {
-        $query->where('user_id', Auth::user()->id);
+        $query->where('rosetta_trees.user_id', Auth::user()->id);
     }
 
     public function scopeStock($query)
     {
         $query->where('stock_id', \Request::get('stock_id'));
+        //$query->leftJoin('valuation_trees', 'rosetta_trees.id', '=', 'valuation_trees.tree_id')->where('rosetta_trees.stock_id', \Request::get('stock_id'));
     }
 
     public static function boot()

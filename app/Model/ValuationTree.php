@@ -46,6 +46,11 @@ class ValuationTree extends Model
         $query->where('user_id', Auth::user()->id);
     }
 
+    public function scopeByNode($query, $nodeId)
+    {
+        $query->where('tree_id', $nodeId);
+    }
+
     public static function boot()
     {
         parent::boot();
