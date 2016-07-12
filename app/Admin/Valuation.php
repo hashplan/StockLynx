@@ -88,4 +88,5 @@ AdminSection::registerModel(ValuationTree::class, function (ModelConfiguration $
 
         return $form;
     });
+
 });

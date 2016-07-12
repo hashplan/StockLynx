@@ -215,7 +215,7 @@ class FormButtons implements FormButtonsInterface
     {
         return [
             'attributes'              => $this->htmlAttributesToString(),
-            'backUrl'                 => $this->getModelConfiguration()->getDisplayUrl(),
+            'backUrl'                 => \URL::previous(),
             'saveButtonText'          => $this->getSaveButtonText(),
             'saveAndCloseButtonText'  => $this->getSaveAndCloseButtonText(),
             'saveAndCreateButtonText' => $this->getSaveAndCreateButtonText(),
