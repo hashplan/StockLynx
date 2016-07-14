@@ -6,10 +6,13 @@ Route::get('add_user_stock/{stock_id}', ['as' => 'admin.add_user_stock', functio
     Auth::user()->stocks()->attach($stock_id);
     return 1;
 }]);
+
 Route::get('remove_user_stock/{stock_id}', ['as' => 'admin.add_remove_stock', function($stock_id){
     Auth::user()->stocks()->detach($stock_id);
     return redirect('admin/');
 }]);
+
+Route::get('/tree', ['as' => 'admin.tree', 'uses' => '\App\Http\Controllers\HomeController@tree']);
 
 Route::get('/information', ['as' => 'admin.information', function () {
 	$content = 'You could paste your information here.';

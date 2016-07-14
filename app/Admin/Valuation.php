@@ -70,7 +70,7 @@ AdminSection::registerModel(ValuationTree::class, function (ModelConfiguration $
 //                AdminFormElement::text('ev', 'EV'),//COMPUTED
 //                AdminFormElement::text('mkt_cap', 'MKT cap'),//COMPUTED
 //                AdminFormElement::text('diluted_shares', 'Diluted Shares'),//COMPUTED field 'Shares' from TreeCapitalization table, Based on value/share [Allow user override]
-                AdminFormElement::text('discount_rate', 'Discount Rate'),//Suggest 10%, Pop up suggestion, that this is for Equity - time value
+                AdminFormElement::text('discount_rate', 'Discount Rate %')->setDefaultValue('10'),//Suggest 10%, Pop up suggestion, that this is for Equity - time value
                 AdminFormElement::wysiwyg('discount_rate_comment', 'Discount Rate Comment'),
 //                AdminFormElement::text('discount_days', 'Discount Days'),//COMPUTED
 //                AdminFormElement::text('value_per_share_raw', 'value per share raw'),//COMPUTED

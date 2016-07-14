@@ -20,24 +20,14 @@ class HomeController extends AdminController
     {
         return (Auth::check())?view('home'):view('notloggedin');
     }
-
     /**
-     * Show the application branch.
+     * Show the application tree.
      *
      * @return \Illuminate\Http\Response
      */
-    public function branch()
+    public function tree()
     {
-        return (Auth::check())?$this->renderContent(view('branch')):view('notloggedin');
-    }
-    /**
-     * Show the application scenario.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function scenario()
-    {
-        return (Auth::check())?$this->renderContent(view('scenario')):view('notloggedin');
+        return (Auth::check())?$this->renderContent(view('tree')):view('notloggedin');
     }
     /**
      * Show the application dashboard.
