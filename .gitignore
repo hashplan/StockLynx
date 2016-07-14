@@ -1,7 +1,7 @@
 /vendor/*
 /node_modules
 /public/storage
-#/public/packages
+!/public/packages
 Homestead.yaml
 Homestead.json
 #/config/sleeping_owl.php
