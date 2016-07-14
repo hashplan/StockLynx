@@ -54,8 +54,8 @@
 
 <!-- /.info-box -->
 </div>
-{{ HTML::script('packages/raphael/raphael.min.js') }}
-{{ HTML::script('packages/jquery.easing/jquery.easing.min.js') }}
+{{ HTML::script('packages/treant-js/vendor/raphael.js') }}
+{{ HTML::script('packages/treant-js/vendor/jquery.easing.js') }}
 {{ HTML::script('packages/treant-js/Treant.js') }}
 {{ HTML::script('packages/treant-js/collapsable.js') }}
 <script>
