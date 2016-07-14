@@ -1,4 +1,4 @@
-{{ HTML::style('packages/treant-js/Treant.css') }}
+{{ HTML::style('treant-js/Treant.css') }}
 <style type="text/css">
     .chart { height: 700px; margin: 5px; width: 100%; }
     .Treant > .node { padding: 3px; border: 1px solid #484848; border-radius: 3px; }
@@ -54,10 +54,10 @@
 
 <!-- /.info-box -->
 </div>
-{{ HTML::script('packages/treant-js/vendor/raphael.js') }}
-{{ HTML::script('packages/treant-js/vendor/jquery.easing.js') }}
-{{ HTML::script('packages/treant-js/Treant.js') }}
-{{ HTML::script('packages/treant-js/collapsable.js') }}
+{{ HTML::script('treant-js/vendor/raphael.js') }}
+{{ HTML::script('treant-js/vendor/jquery.easing.js') }}
+{{ HTML::script('treant-js/Treant.js') }}
+{{ HTML::script('treant-js/collapsable.js') }}
 <script>
     $(function() {
         tree = new Treant( chart_config );
