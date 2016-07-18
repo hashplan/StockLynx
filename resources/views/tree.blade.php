@@ -32,7 +32,7 @@
                 <div class="row">
                     <div class="col-md-12 col-sm-12">
                         {{--<div class="pad">--}}
-                            <div class="chart" id="collapsable"></div>
+                            <div class="chart Treant Treant-loaded" id="collapsable"></div>
 
                             <!-- Buttons will be created here -->
 
@@ -54,12 +54,16 @@
 
 <!-- /.info-box -->
 </div>
+{{--{{ $chart_config }}--}}
 {{ HTML::script('treant-js/vendor/raphael.js') }}
 {{ HTML::script('treant-js/vendor/jquery.easing.js') }}
 {{ HTML::script('treant-js/Treant.js') }}
-{{ HTML::script('treant-js/collapsable.js') }}
+{{--{{ HTML::script('treant-js/collapsable.js') }}--}}
+{{--{{ HTML::script('treant-js/no-parent.js') }}--}}
+{{--{!! dd($chart_config) !!}--}}
 <script>
     $(function() {
+        {!! $chart_config !!}
         tree = new Treant( chart_config );
     });
 </script>

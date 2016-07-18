@@ -1,6 +1,5 @@
-
+/*
     var chart_config = {
-        parseTime:false,
         chart: {
             container: "#collapsable",
 
@@ -51,10 +50,9 @@
             ]
         }
     };
-
-/* Array approach
+*/
     var config = {
-        container: "#collapsable-example",
+        container: "#collapsable",
 
         animateOnInit: true,
         
@@ -109,5 +107,3 @@
     },
 
     chart_config = [config, malory, lana, figgs, sterling, woodhouse, pseudo, pam, cheryl];
-
-*/
