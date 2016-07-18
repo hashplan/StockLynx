@@ -98,7 +98,7 @@ class HomeController extends AdminController
 
     private function byTreeNode($node)
     {
-        return 'node_'.intval($node->id).' = {parent:' . 'node_' . $node->parent_id .','.
+        return 'node_'.intval($node->id).' = {parent:' . 'node_' . intval($node->parent_id) .','.
             'text:{'.
                 'name:{'.
                     'val:"' . $node->name .'",'.
@@ -112,7 +112,7 @@ class HomeController extends AdminController
 
     private function byTreeLeaf($leaf)
     {
-        return 'leaf_'.intval($leaf->id).' = {parent:' . 'node_' . $leaf->tree_id .','.
+        return 'leaf_'.intval($leaf->id).' = {parent:' . 'node_' . intval($leaf->tree_id) .','.
                 'text:{'.
                     'name:{'.
                         'val:"' . $leaf->scenario_name .'",'.
