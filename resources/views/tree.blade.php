@@ -28,6 +28,10 @@
                 </div>
             </div>
             <!-- /.box-header -->
+            <ul class="nav nav-tabs">
+                <li role="tree_view" class="active"><a href="/admin/tree?stock_id={{\Request::get('stock_id')}}">View</a></li>
+                <li role="tree_edit"><a href="/admin/trees?stock_id={{\Request::get('stock_id')}}">Edit</a></li>
+            </ul>
             <div class="box-body no-padding">
                 <div class="row">
                     <div class="col-md-12 col-sm-12">

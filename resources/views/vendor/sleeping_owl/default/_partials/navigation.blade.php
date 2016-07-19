@@ -49,7 +49,7 @@
         </li>
         @foreach (Auth::user()->stocks()->get() as $stock)
             <li class="stockMenuItem {{(\Request::get('stock_id') == $stock->id)?'treeview active':''}}">
-                <a href="/admin/trees?stock_id={{$stock->id}}">
+                <a href="/admin/tree?stock_id={{$stock->id}}">
                     <i class="fa fa-money"></i>
                     {{$stock->securityName}}
                     <i class="fa fa-angle-left pull-right"></i>

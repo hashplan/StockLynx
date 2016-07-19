@@ -8,7 +8,7 @@ AdminSection::registerModel(RosettaTree::class, function (ModelConfiguration $mo
 
     // Display
     $model->onDisplay(function () {
-        $display = AdminDisplay::tree()->setValue('name');//->setValue('value')
+        $display = AdminDisplay::tree()->setValue('name');
 
         $display->getScopes()->push('stock');
         $display->getScopes()->push('own');
