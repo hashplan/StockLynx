@@ -24,7 +24,7 @@ AdminSection::registerModel(RosettaTree::class, function (ModelConfiguration $mo
                 //AdminFormElement::select('parent_id', 'Select Parent Node', RosettaTree::own()->lists('name', 'id')->all()),
                 AdminFormElement::hidden('stock_id')->setDefaultValue(\Request::get('stock_id')),
                 ($parent)?AdminFormElement::hidden('parent_id')->setDefaultValue($parent):'',//RosettaTree::own()->lists('name', 'id')->all()
-                AdminFormElement::text('name', 'Title')->required()->addValidationRule('regex:/^[\pL\s\-]+$/u')->addValidationRule('max:255'),
+                AdminFormElement::text('name', 'Title')->required()->addValidationRule('max:255'),//->addValidationRule('regex:/^[\pL\s]+$/u')
                 AdminFormElement::wysiwyg('comment', 'Comment')->required()->addValidationRule('max:255'),
                 AdminFormElement::select('status', 'Status', RosettaTree::getPossibleEnumValues('status')),
             ]);
