@@ -22,7 +22,7 @@ AdminSection::registerModel(User::class, function (ModelConfiguration $model) {
     // Create And Edit
     $model->onCreateAndEdit(function() {
         return AdminForm::panel()->addBody([
-            AdminFormElement::text('name', 'Username')->required()->addValidationRule('alpha_num')->addValidationRule('max:255'),
+            AdminFormElement::text('name', 'Username')->required()->addValidationRule('regex:/^[\pL\s\-]+$/u')->addValidationRule('max:255'),
             AdminFormElement::password('password', 'Password')->required()->addValidationRule('min:6'),
             AdminFormElement::text('email', 'E-mail')->required()->addValidationRule('email'),
             AdminFormElement::multiselect('roles', 'Roles')->setModelForOptions(new Role())->setDisplay('name'),

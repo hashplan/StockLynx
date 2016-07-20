@@ -1,16 +1,22 @@
 {{ HTML::style('treant-js/Treant.css') }}
 <style type="text/css">
     .chart { height: 700px; margin: 5px; width: 100%; }
-    .Treant > .node { padding: 3px; border: 1px solid #484848; border-radius: 3px; }
+    .Treant > .node { background-color: #f4e8c3; padding-left: 7px; padding-right: 7px; border: 1px solid #484848; border-radius: 3px; text-align: left; vertical-align: middle; }
     .Treant > .node img { width: 100%; height: 100%; }
     .Treant .collapse-switch { width: 100%; height: 100%; border: none; }
-    .Treant .node.collapsed { background-color: #DEF82D; }
+    .Treant .node.collapsed { background-color: #eac785; box-shadow: 1px 1px 1px rgba(0,0,0,.5); }
+    .Treant .node:hover { text-shadow: 1px 1px rgba(0,0,0,.25); }
     .Treant .node.collapsed .collapse-switch { background: none; }
+
 </style>
 <!-- Info boxes -->
 {{--<div class="col-xs-12"><hr></div>--}}
 <!-- /.row -->
 <!-- Main row -->
+<ul class="nav nav-tabs">
+    <li role="tree_view" class="active"><a href="/admin/tree?stock_id={{\Request::get('stock_id')}}">View</a></li>
+    <li role="tree_edit"><a href="/admin/trees?stock_id={{\Request::get('stock_id')}}">Edit</a></li>
+</ul>
 <div class="row">
     <!-- Left col -->
     <div class="col-md-12">
@@ -28,10 +34,6 @@
                 </div>
             </div>
             <!-- /.box-header -->
-            <ul class="nav nav-tabs">
-                <li role="tree_view" class="active"><a href="/admin/tree?stock_id={{\Request::get('stock_id')}}">View</a></li>
-                <li role="tree_edit"><a href="/admin/trees?stock_id={{\Request::get('stock_id')}}">Edit</a></li>
-            </ul>
             <div class="box-body no-padding">
                 <div class="row">
                     <div class="col-md-12 col-sm-12">

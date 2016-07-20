@@ -23,37 +23,70 @@ class HomeController extends AdminController
         return (Auth::check())?view('home'):view('notloggedin');
     }
     /**
-     * Show the application tree.
+     * create array() with the application tree.
      *
-     * @return \Illuminate\Http\Response
+     * @return array()
      */
     static function generateNodeStructure($tree) {
-        $res = [];$c = [];
+
+
+        $res = [];
+
         foreach($tree as $node) {
+
+            $c = [];
             $childrens = [];
+
             if(!empty($node['children'])) {
                 $childrens = self::generateNodeStructure($node['children']);
             }
+
             foreach(ValuationTree::own()->byNode($node['id'])->get()->toArray() as $valuation) {
+                $comment_valuation = explode(PHP_EOL, $valuation['scenario_comment']);
+
                 $c[] = [
-                    'text'=> [
-                        'name'=> $valuation['scenario_name']
-                    ]
+//                    'text'=> [
+//                        'name'=> $valuation['scenario_name']
+//                    ],
+                    'innerHTML' => $valuation['scenario_name'].'<br/>'.trim(str_replace("\r", '', $comment_valuation[0])).'...',
+                    'node' => [
+                        'HTMLclass' => 'big-bubble-child'
+                    ],
                 ];
             }
 
             $childrens = array_merge($c, $childrens);
 
+            $comment_node = explode(PHP_EOL, $node['comment']);
+
             $res[] = [
-                'text'=> [
-                    'name'=> $node['name']
+//                'text'=> [
+//                    'name'=> $node['name']
+//                ],
+                'innerHTML' => $node['name'].'<br/>'.trim(str_replace("\r", '', $comment_node[0])).'...',
+                'connectors' => [
+                    'style' => [
+                        'stroke' => '#000',
+                        'arrow-end' => 'block-wide-long',
+                        'arrow-start' => 'oval-wide-long',
+                    ],
+                ],
+                'node' => [
+                    'HTMLclass' => 'big-bubble'
                 ],
                 'children' => $childrens
             ];
 
         }
+
         return $res;
     }
+
+    /**
+     * Show the application tree.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function tree()
     {
         $R = [
@@ -62,12 +95,12 @@ class HomeController extends AdminController
                     'rootOrientation' => 'WEST',
                     'animateOnInit' => true,
                     'hideRootNode' => true,
-                    'connectors' => [
-                        'type'=>'step',
-                        'step'=> [
-                            'stroke-width'=>2
-                        ]
-                    ],
+//                    'connectors' => [
+//                        'type'=>'step',
+//                        'style'=> [
+//                            'stroke-width'=>2
+//                        ]
+//                    ],
                     'node' => [
                         'collapsable' => true
                     ],

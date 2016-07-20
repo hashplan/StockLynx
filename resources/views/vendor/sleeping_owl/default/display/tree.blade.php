@@ -10,7 +10,10 @@
         });
     })
 </script>
-
+<ul class="nav nav-tabs">
+    <li role="tree_view"><a href="/admin/tree?stock_id={{\Request::get('stock_id')}}">View</a></li>
+    <li role="tree_edit" class="active"><a href="/admin/trees?stock_id={{\Request::get('stock_id')}}">Edit</a></li>
+</ul>
 <div class="panel panel-default">
     <div class="panel-heading">
         @if ($creatable)
@@ -19,10 +22,6 @@
             </a>
         @endif
     </div>
-    <ul class="nav nav-tabs">
-        <li role="tree_view"><a href="/admin/tree?stock_id={{\Request::get('stock_id')}}">View</a></li>
-        <li role="tree_edit" class="active"><a href="/admin/trees?stock_id={{\Request::get('stock_id')}}">Edit</a></li>
-    </ul>
     <div class="panel-body">
         <div class="dd nestable" data-url="{{ $url }}/reorder">
             <ol class="dd-list">
