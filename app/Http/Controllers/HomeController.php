@@ -43,7 +43,6 @@ class HomeController extends AdminController
 
             foreach(ValuationTree::own()->byNode($node['id'])->get()->toArray() as $valuation) {
                 $comment_valuation = explode(PHP_EOL, $valuation['scenario_comment']);
-
                 $c[] = [
 //                    'text'=> [
 //                        'name'=> $valuation['scenario_name']

@@ -7,7 +7,7 @@
     .Treant .node.collapsed { background-color: #eac785; box-shadow: 1px 1px 1px rgba(0,0,0,.5); }
     .Treant .node:hover { text-shadow: 1px 1px rgba(0,0,0,.25); }
     .Treant .node.collapsed .collapse-switch { background: none; }
-
+    /*.root-nodes { background-color: #eac785; }*/
 </style>
 <!-- Info boxes -->
 {{--<div class="col-xs-12"><hr></div>--}}
@@ -29,24 +29,34 @@
                     <button type="button" class="btn btn-box-tool" data-widget="collapse">
                         <i class="fa fa-minus"></i>
                     </button>
-                    <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i>
+                    <button type="button" class="btn btn-box-tool" data-widget="remove">
+                        <i class="fa fa-times"></i>
                     </button>
                 </div>
             </div>
             <!-- /.box-header -->
             <div class="box-body no-padding">
-                <div class="row">
-                    <div class="col-md-12 col-sm-12">
-                        {{--<div class="pad">--}}
-                            <div class="chart Treant Treant-loaded" id="collapsable"></div>
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-1 col-sm-1 root-nodes">
+                            <ul class="list-group">
+                            @foreach (App\Model\RosettaTree::own()->stock()->get() as $rootNode)
+                                    <li class="list-group-item"><span class="badge">{{  $rootNode->children()->count() }}</span><a href="#">{{ $rootNode->name }}</a></li>
+                            @endforeach
+                            </ul>
+                        </div>
+                        <div class="col-md-11 col-sm-11">
+                            {{--<div class="pad">--}}
+                                <div class="chart Treant Treant-loaded" id="collapsable"></div>
 
-                            <!-- Buttons will be created here -->
+                                <!-- Buttons will be created here -->
 
-                        {{--</div>--}}
+                            {{--</div>--}}
+                        </div>
+                        <!-- /.col -->
+
+                        <!-- /.col -->
                     </div>
-                    <!-- /.col -->
-
-                    <!-- /.col -->
                 </div>
                 <!-- /.row -->
             </div>

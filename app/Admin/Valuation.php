@@ -56,26 +56,26 @@ AdminSection::registerModel(ValuationTree::class, function (ModelConfiguration $
                 AdminFormElement::select('framework', 'Framework', ValuationTree::getPossibleEnumValues('framework')),//['Fundamental','Merger Arbitrage','Volatility Arbitrage','Distressed','Catalyst']
 //                AdminFormElement::text('level', 'level'),//level of the node
                 AdminFormElement::text('scenario_name', 'Scenario Name')->required(),
-                AdminFormElement::wysiwyg('scenario_comment', 'Scenario Comment')->required(),
+                AdminFormElement::text('scenario_comment', 'Scenario Comment')->required(),//wysiwyg
                 AdminFormElement::select('valuation_method', 'Valuation Method', ValuationTree::getPossibleEnumValues('valuation_method')),//['custom', 'multiple', 'yield']
                 AdminFormElement::date('valuation_date', 'Valuation Date')->setCurrentDate(),
                 AdminFormElement::select('metric', 'Metric', ValuationTree::getPossibleEnumValues('metric')),//['null', 'Net Income', 'EPS', 'EBITDA', 'Revenue', 'Levered FCF', 'Levered FCF per Share', 'Unlevered FCF', 'Dividend per Share']
-                AdminFormElement::wysiwyg('metric_comment', 'Metric Comment'),
+                AdminFormElement::text('metric_comment', 'Metric Comment'),//wysiwyg
                 AdminFormElement::select('modifier', 'Modifier', ValuationTree::getPossibleEnumValues('modifier')),//['null', 'multiple', 'yield']
-                AdminFormElement::wysiwyg('modifier_comment', 'Modifier Comment'),
+                AdminFormElement::text('modifier_comment', 'Modifier Comment'),//wysiwyg
                 AdminFormElement::text('cash', 'Cash'),//Pull from XML , [Allow user override]
-                AdminFormElement::wysiwyg('cash_comment', 'Cash Comment'),
+                AdminFormElement::text('cash_comment', 'Cash Comment'),//wysiwyg
                 AdminFormElement::select('debt', 'Debt', ValuationTree::getPossibleEnumValues('debt')),//Pull from XML ['Current Portion', 'Long-term Portion', 'Minority Interest'] , [Allow user override]
-                AdminFormElement::wysiwyg('debt_comment', 'Debt Comment'),
+                AdminFormElement::text('debt_comment', 'Debt Comment'),//wysiwyg
 //                AdminFormElement::text('ev', 'EV'),//COMPUTED
 //                AdminFormElement::text('mkt_cap', 'MKT cap'),//COMPUTED
 //                AdminFormElement::text('diluted_shares', 'Diluted Shares'),//COMPUTED field 'Shares' from TreeCapitalization table, Based on value/share [Allow user override]
                 AdminFormElement::text('discount_rate', 'Discount Rate %')->setDefaultValue('10'),//Suggest 10%, Pop up suggestion, that this is for Equity - time value
-                AdminFormElement::wysiwyg('discount_rate_comment', 'Discount Rate Comment'),
+                AdminFormElement::text('discount_rate_comment', 'Discount Rate Comment'),//wysiwyg
 //                AdminFormElement::text('discount_days', 'Discount Days'),//COMPUTED
 //                AdminFormElement::text('value_per_share_raw', 'value per share raw'),//COMPUTED
 //                AdminFormElement::text('value_per_share_current', 'value_per_share_current'),//COMPUTED
-                AdminFormElement::wysiwyg('valuation_comment', 'Valuation Comment'),
+                AdminFormElement::text('valuation_comment', 'Valuation Comment'),//wysiwyg
                 /***/
 //                AdminFormElement::text('name', 'Title')->required(),
 //                AdminFormElement::wysiwyg('comment', 'Comment')->required(),
