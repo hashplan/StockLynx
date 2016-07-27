@@ -60,12 +60,12 @@ class ValuationTree extends Model
             if(!Auth::guest()) {
                 $model->user_id = Auth::user()->id;
                 $model->level = RosettaTree::level($model->tree_id)->lists('depth')[0];
-//                $model->ev = ;
-//	            $model->mkt_cap = ;
+                $model->ev = $model->metric * $model->modifier;
+	            $model->mkt_cap =  $model->metric * $model->modifier;
 //	            $model->diluted_shares = ;
 	            $model->discount_days = floor(strtotime($model->valuation_date) - time())/(60*60*24);
-//	            $model->value_per_share_raw = ;
-//	            $model->value_per_share_current = ;
+	            $model->value_per_share_raw = $model->metric * $model->modifier;
+	            $model->value_per_share_current = $model->value_per_share_raw / ((1+$model->discount_rate) ** ($model->discount_days/365));
             }
         });
 
@@ -74,7 +74,13 @@ class ValuationTree extends Model
             if(!Auth::guest()) {
                 $model->user_id = Auth::user()->id;
                 $model->level = RosettaTree::level($model->tree_id)->lists('depth')[0];
+
+                $model->ev = $model->metric * $model->modifier;
+                $model->mkt_cap =  $model->metric * $model->modifier;
+//	            $model->diluted_shares = ;
                 $model->discount_days = floor(strtotime($model->valuation_date) - time())/(60*60*24);
+                $model->value_per_share_raw = $model->metric * $model->modifier;
+                $model->value_per_share_current = $model->value_per_share_raw / ((1+$model->discount_rate) ** ($model->discount_days/365));
             }
         });
     }

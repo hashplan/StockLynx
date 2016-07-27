@@ -59,9 +59,11 @@ AdminSection::registerModel(ValuationTree::class, function (ModelConfiguration $
                 AdminFormElement::text('scenario_comment', 'Scenario Comment')->required(),//wysiwyg
                 AdminFormElement::select('valuation_method', 'Valuation Method', ValuationTree::getPossibleEnumValues('valuation_method')),//['custom', 'multiple', 'yield']
                 AdminFormElement::date('valuation_date', 'Valuation Date')->setCurrentDate(),
-                AdminFormElement::select('metric', 'Metric', ValuationTree::getPossibleEnumValues('metric')),//['null', 'Net Income', 'EPS', 'EBITDA', 'Revenue', 'Levered FCF', 'Levered FCF per Share', 'Unlevered FCF', 'Dividend per Share']
+                //AdminFormElement::select('metric', 'Metric', ValuationTree::getPossibleEnumValues('metric')),//['null', 'Net Income', 'EPS', 'EBITDA', 'Revenue', 'Levered FCF', 'Levered FCF per Share', 'Unlevered FCF', 'Dividend per Share']
+                AdminFormElement::text('metric', 'Metric')->required(),//['null', 'Net Income', 'EPS', 'EBITDA', 'Revenue', 'Levered FCF', 'Levered FCF per Share', 'Unlevered FCF', 'Dividend per Share']
                 AdminFormElement::text('metric_comment', 'Metric Comment'),//wysiwyg
-                AdminFormElement::select('modifier', 'Modifier', ValuationTree::getPossibleEnumValues('modifier')),//['null', 'multiple', 'yield']
+                //AdminFormElement::select('modifier', 'Modifier', ValuationTree::getPossibleEnumValues('modifier')),//['null', 'multiple', 'yield']
+                AdminFormElement::text('modifier', 'Modifier')->required(),//['null', 'multiple', 'yield']
                 AdminFormElement::text('modifier_comment', 'Modifier Comment'),//wysiwyg
                 AdminFormElement::text('cash', 'Cash'),//Pull from XML , [Allow user override]
                 AdminFormElement::text('cash_comment', 'Cash Comment'),//wysiwyg
