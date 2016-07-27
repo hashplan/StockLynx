@@ -87,6 +87,11 @@ class HomeController extends AdminController
      */
     public function tree()
     {
+        if(\Request::get('node_id')){
+            $res = [RosettaTree::own()->stock()->get()->toHierarchy()->toArray()[\Request::get('node_id')]];
+        }else{
+            $res = RosettaTree::own()->stock()->get()->toHierarchy()->toArray();
+        }
         $R = [
                 'chart' => [
                     'container' => '#collapsable',
@@ -111,7 +116,7 @@ class HomeController extends AdminController
                 ],
 
                 'nodeStructure' => [
-                    'children' => self::generateNodeStructure([RosettaTree::own()->stock()->get()->toHierarchy()->toArray()[\Request::get('node_id')]])
+                    'children' => self::generateNodeStructure($res)
                 ]
         ];
         $result = 'var chart_config = '.json_encode($R).';';
