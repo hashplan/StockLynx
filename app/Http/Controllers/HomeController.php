@@ -29,7 +29,6 @@ class HomeController extends AdminController
      */
     static function generateNodeStructure($tree) {
 
-
         $res = [];
 
         foreach($tree as $node) {
@@ -112,7 +111,7 @@ class HomeController extends AdminController
                 ],
 
                 'nodeStructure' => [
-                    'children' => self::generateNodeStructure(RosettaTree::own()->stock()->get()->toHierarchy()->toArray())
+                    'children' => self::generateNodeStructure([RosettaTree::own()->stock()->get()->toHierarchy()->toArray()[\Request::get('node_id')]])
                 ]
         ];
         $result = 'var chart_config = '.json_encode($R).';';

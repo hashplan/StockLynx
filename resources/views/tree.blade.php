@@ -41,7 +41,9 @@
                         <div class="col-md-1 col-sm-1 root-nodes">
                             <ul class="list-group">
                             @foreach (App\Model\RosettaTree::own()->stock()->get() as $rootNode)
-                                    <li class="list-group-item"><span class="badge">{{  $rootNode->children()->count() }}</span><a href="#">{{ $rootNode->name }}</a></li>
+                                @if(0 == $rootNode->getLevel())
+                                    <li class="list-group-item"><span class="badge">{{  $rootNode->descendants()->count() }}</span><a href="/admin/tree?stock_id={{$rootNode->stock_id}}&node_id={{$rootNode->id}}">{{ $rootNode->name }}</a></li>
+                                @endif
                             @endforeach
                             </ul>
                         </div>

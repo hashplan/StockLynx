@@ -33,6 +33,11 @@ class RosettaTree extends Node
         //$query->leftJoin('valuation_trees', 'rosetta_trees.id', '=', 'valuation_trees.tree_id')->where('rosetta_trees.stock_id', \Request::get('stock_id'));
     }
 
+//    public function scopeStockChilds($query)
+//    {
+//        $query->where('stock_id', \Request::get('stock_id'))->where('id', '<>',\Request::get('node_id'));
+//    }
+
     public static function boot()
     {
         parent::boot();
