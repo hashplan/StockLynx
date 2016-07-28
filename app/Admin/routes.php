@@ -14,6 +14,8 @@ Route::get('remove_user_stock/{stock_id}', ['as' => 'admin.add_remove_stock', fu
 
 Route::get('/tree', ['as' => 'admin.tree', 'uses' => '\App\Http\Controllers\HomeController@tree']);
 
+Route::get('/chart', ['as' => 'admin.chart', 'uses' => '\App\Http\Controllers\HomeController@charts']);
+
 Route::get('/information', ['as' => 'admin.information', function () {
 	$content = 'You could paste your information here.';
 	return AdminSection::view($content, 'Information');

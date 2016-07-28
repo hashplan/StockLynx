@@ -85,6 +85,22 @@ class HomeController extends AdminController
      *
      * @return \Illuminate\Http\Response
      */
+    public function charts()
+    {
+        $result = [];
+
+        foreach(ValuationTree::own()->byNode(\Request::get('stock_id'))->get()->toArray() as $valuation) {
+            $result[] = $valuation;
+        }
+
+        return (Auth::check())?$this->renderContent(view('charts')->with('chart_config', json_encode($result))):view('notloggedin');
+    }
+
+    /**
+     * Show the application tree.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function tree()
     {
         if(\Request::get('node_id')){
