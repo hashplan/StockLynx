@@ -13,6 +13,7 @@
 <ul class="nav nav-tabs">
     <li role="tree_view"><a href="/admin/tree?stock_id={{\Request::get('stock_id')}}">View</a></li>
     <li role="tree_edit" class="active"><a href="/admin/trees?stock_id={{\Request::get('stock_id')}}">Edit</a></li>
+    <li role="tree_chart"><a href="/admin/chart?stock_id={{\Request::get('stock_id')}}">Charts</a></li>
 </ul>
 <div class="panel panel-default">
     <div class="panel-heading">
