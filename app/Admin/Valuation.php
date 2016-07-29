@@ -22,6 +22,7 @@ AdminSection::registerModel(ValuationTree::class, function (ModelConfiguration $
             AdminColumn::text('valuation_method')->setLabel('valuation method'),
             AdminColumn::datetime('valuation_date')->setLabel('valuation date'),
             AdminColumn::text('metric')->setLabel('metric'),
+            AdminColumn::text('metric_value')->setLabel('metric value'),
 //            AdminColumn::text('metric_comment')->setLabel('metric_comment'),
             AdminColumn::text('modifier')->setLabel('modifier'),
 //            AdminColumn::text('modifier_comment')->setLabel('modifier_comment'),
@@ -59,8 +60,8 @@ AdminSection::registerModel(ValuationTree::class, function (ModelConfiguration $
                 AdminFormElement::text('scenario_comment', 'Scenario Comment')->required(),//wysiwyg
                 AdminFormElement::select('valuation_method', 'Valuation Method', ValuationTree::getPossibleEnumValues('valuation_method')),//['custom', 'multiple', 'yield']
                 AdminFormElement::date('valuation_date', 'Valuation Date')->setCurrentDate(),
-                //AdminFormElement::select('metric', 'Metric', ValuationTree::getPossibleEnumValues('metric')),//['null', 'Net Income', 'EPS', 'EBITDA', 'Revenue', 'Levered FCF', 'Levered FCF per Share', 'Unlevered FCF', 'Dividend per Share']
-                AdminFormElement::text('metric', 'Metric')->required(),//['null', 'Net Income', 'EPS', 'EBITDA', 'Revenue', 'Levered FCF', 'Levered FCF per Share', 'Unlevered FCF', 'Dividend per Share']
+                AdminFormElement::select('metric', 'Metric', ValuationTree::getPossibleEnumValues('metric')),//['null', 'Net Income', 'EPS', 'EBITDA', 'Revenue', 'Levered FCF', 'Levered FCF per Share', 'Unlevered FCF', 'Dividend per Share']
+                AdminFormElement::text('metric_value', 'Metric Value')->required(),//['null', 'Net Income', 'EPS', 'EBITDA', 'Revenue', 'Levered FCF', 'Levered FCF per Share', 'Unlevered FCF', 'Dividend per Share']
                 AdminFormElement::text('metric_comment', 'Metric Comment'),//wysiwyg
                 //AdminFormElement::select('modifier', 'Modifier', ValuationTree::getPossibleEnumValues('modifier')),//['null', 'multiple', 'yield']
                 AdminFormElement::text('modifier', 'Modifier')->required(),//['null', 'multiple', 'yield']
@@ -71,7 +72,7 @@ AdminSection::registerModel(ValuationTree::class, function (ModelConfiguration $
                 AdminFormElement::text('debt_comment', 'Debt Comment'),//wysiwyg
 //                AdminFormElement::text('ev', 'EV'),//COMPUTED
 //                AdminFormElement::text('mkt_cap', 'MKT cap'),//COMPUTED
-//                AdminFormElement::text('diluted_shares', 'Diluted Shares'),//COMPUTED field 'Shares' from TreeCapitalization table, Based on value/share [Allow user override]
+                AdminFormElement::text('diluted_shares', 'Diluted Shares'),//COMPUTED field 'Shares' from TreeCapitalization table, Based on value/share [Allow user override]
                 AdminFormElement::text('discount_rate', 'Discount Rate %')->setDefaultValue('10'),//Suggest 10%, Pop up suggestion, that this is for Equity - time value
                 AdminFormElement::text('discount_rate_comment', 'Discount Rate Comment'),//wysiwyg
 //                AdminFormElement::text('discount_days', 'Discount Days'),//COMPUTED

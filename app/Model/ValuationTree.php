@@ -23,6 +23,7 @@ class ValuationTree extends Model
         'valuation_method',
         'valuation_date',
         'metric',
+        'metric_value',
         'metric_comment',
         'modifier',
         'modifier_comment',
@@ -60,11 +61,11 @@ class ValuationTree extends Model
             if(!Auth::guest()) {
                 $model->user_id = Auth::user()->id;
                 $model->level = RosettaTree::level($model->tree_id)->lists('depth')[0];
-                $model->ev = $model->metric * $model->modifier;
-	            $model->mkt_cap =  $model->metric * $model->modifier;
+                $model->ev = self::calculateEV($model);//$model->metric * $model->modifier;
+	            $model->mkt_cap =  self::calculateMktCap($model);//$model->metric * $model->modifier;
 //	            $model->diluted_shares = ;
 	            $model->discount_days = floor(strtotime($model->valuation_date) - time())/(60*60*24);
-	            $model->value_per_share_raw = $model->metric * $model->modifier;
+	            $model->value_per_share_raw = self::calculateValuePerShareRaw($model);
 	            $model->value_per_share_current = $model->value_per_share_raw / ((1+$model->discount_rate) ** ($model->discount_days/365));
             }
         });
@@ -75,12 +76,13 @@ class ValuationTree extends Model
                 $model->user_id = Auth::user()->id;
                 $model->level = RosettaTree::level($model->tree_id)->lists('depth')[0];
 
-                $model->ev = $model->metric * $model->modifier;
-                $model->mkt_cap =  $model->metric * $model->modifier;
+                $model->ev = self::calculateEV($model);//$model->metric * $model->modifier;
+                $model->mkt_cap =  self::calculateMktCap($model);//$model->metric * $model->modifier;
 //	            $model->diluted_shares = ;
                 $model->discount_days = floor(strtotime($model->valuation_date) - time())/(60*60*24);
-                $model->value_per_share_raw = $model->metric * $model->modifier;
+                $model->value_per_share_raw = self::calculateValuePerShareRaw($model);
                 $model->value_per_share_current = $model->value_per_share_raw / ((1+$model->discount_rate) ** ($model->discount_days/365));
+                //dd([$model->ev, $model->mkt_cap, $model->value_per_share_raw]);
             }
         });
     }
@@ -100,5 +102,110 @@ class ValuationTree extends Model
             $enum[$v] = $v;
         }
         return $enum;
+    }
+
+    private static function calculateEV($model){
+
+        switch($model->metric){
+            case 'NULL':
+                $result = 0;
+                break;
+            case 'Net Income':
+                $result = $model->metric_value * $model->modifier + $model->debt - $model->cash;
+                break;
+            case 'EPS':
+                $result = $model->metric_value * $model->modifier * $model->diluted_shares + $model->debt - $model->cash;
+                break;
+            case 'EBITDA':
+                $result = $model->metric_value * $model->modifier;
+                break;
+            case 'Revenue':
+                $result = $model->metric_value * $model->modifier;
+                break;
+            case 'Levered FCF':
+                $result = $model->metric_value / $model->modifier + $model->debt - $model->cash;
+                break;
+            case 'Levered FCF per Share':
+                $result = $model->metric_value / $model->modifier * $model->diluted_shares + $model->debt - $model->cash;
+                break;
+            case 'Unlevered FCF':
+                $result = $model->metric_value / $model->modifier;
+                break;
+            case 'Dividend per Share':
+                $result = $model->metric_value / $model->modifier * $model->diluted_shares + $model->debt - $model->cash;
+                break;
+        }
+
+        return $result;
+    }
+
+    private static function calculateMktCap($model){
+
+        switch($model->metric){
+            case 'NULL':
+                $result = 0;
+                break;
+            case 'Net Income':
+                $result = $model->metric_value * $model->modifier;
+                break;
+            case 'EPS':
+                $result = $model->metric_value * $model->modifier * $model->diluted_shares;
+                break;
+            case 'EBITDA':
+                $result = $model->metric_value * $model->modifier - $model->debt + $model->cash;
+                break;
+            case 'Revenue':
+                $result = $model->metric_value * $model->modifier - $model->debt + $model->cash;
+                break;
+            case 'Levered FCF':
+                $result = $model->metric_value / $model->modifier;
+                break;
+            case 'Levered FCF per Share':
+                $result = $model->metric_value / $model->modifier * $model->diluted_shares;
+                break;
+            case 'Unlevered FCF':
+                $result = $model->metric_value / $model->modifier - $model->debt + $model->cash;
+                break;
+            case 'Dividend per Share':
+                $result = $model->metric_value / $model->modifier * $model->diluted_shares;
+                break;
+        }
+
+        return $result;
+    }
+
+    private static function calculateValuePerShareRaw($model){
+
+        switch($model->metric){
+            case 'NULL':
+                $result = 0;
+                break;
+            case 'Net Income':
+                $result = $model->metric_value * $model->modifier / $model->diluted_shares;
+                break;
+            case 'EPS':
+                $result = $model->metric_value * $model->modifier;
+                break;
+            case 'EBITDA':
+                $result = ($model->metric_value * $model->modifier - $model->debt + $model->cash) / $model->diluted_shares;
+                break;
+            case 'Revenue':
+                $result = ($model->metric_value * $model->modifier - $model->debt + $model->cash) / $model->diluted_shares;
+                break;
+            case 'Levered FCF':
+                $result = ($model->metric_value / $model->modifier) / $model->diluted_shares;
+                break;
+            case 'Levered FCF per Share':
+                $result = $model->metric_value / $model->modifier;
+                break;
+            case 'Unlevered FCF':
+                $result = ($model->metric_value / $model->modifier - $model->debt + $model->cash) / $model->diluted_shares;
+                break;
+            case 'Dividend per Share':
+                $result = $model->metric_value / $model->modifier;
+                break;
+        }
+
+        return $result;
     }
 }
