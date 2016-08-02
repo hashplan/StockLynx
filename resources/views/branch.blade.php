@@ -8,7 +8,7 @@
         <!-- MAP & BOX PANE -->
         <div class="box box-success">
             <div class="box-header with-border">
-                <h3 class="box-title">Create NEW branch</h3>
+                <h3 class="box-title">Create NEW scenario</h3>
 
                 <div class="box-tools pull-right">
                     <button type="button" class="btn btn-box-tool" data-widget="collapse">
@@ -27,45 +27,63 @@
                             <div class="card card-inverse card-warning text-sm-center col-sm-6 input-group col-xs-offset-3 form-group">
                                 <div class="card-block">
                                     <blockquote class="card-blockquote">
-                                        <p>[NEW tree]</p>
+                                        <p>[NEW scenario]</p>
                                         <footer>Name<cite title="Source Title"> Title</cite></footer>
                                     </blockquote>
                                 </div>
                             </div>
-                            <div class="col-sm-6 input-group col-xs-offset-3 form-group">
-                                <span class="input-group-addon" id="node-name">@</span>
-                                <input type="text" class="form-control" placeholder="Enter name for node / scenario (e.g., Upside Case)" aria-describedby="node-name">
-                            </div>
-                            <div class="col-sm-6 input-group col-xs-offset-3 form-group">
-                                <span class="input-group-addon" id="scenario-description">@</span>
-                                <input type="text" class="form-control" placeholder="Add brief description / commentary of scenario..." aria-describedby="scenario-description">
-                            </div>
+                            <form method="get" action="/admin/valuation/create">
+                                <input type="hidden" name="stock_id" value="{{\Request::get('stock_id')}}"/>
+                                <input type="hidden" name="node_id" value="{{\Request::get('node_id')}}"/>
 
-                            <div class="col-sm-3 text-right col-xs-offset-3 form-group">
-                                <button type="button" class="btn btn-primary btn-lg btn-block">Price to Earnings</button>
-                            </div>
-                            <div class="col-sm-3 form-group">
-                                <button type="button" class="btn btn-primary btn-lg btn-block">Free Cash Flow Yield</button>
-                            </div>
+                                <div class="col-sm-6 input-group col-xs-offset-3 form-group">
+                                    <span class="input-group-addon" id="node-name">@</span>
+                                    <input type="text" class="form-control" placeholder="Enter name for node / scenario (e.g., Upside Case)" aria-describedby="node-name" name="node-name" required="required">
+                                </div>
+                                <div class="col-sm-6 input-group col-xs-offset-3 form-group">
+                                    <span class="input-group-addon" id="scenario-description">@</span>
+                                    <input type="text" class="form-control" placeholder="Add brief description / commentary of scenario..." aria-describedby="scenario-description" name="scenario-description" required="required">
+                                </div>
 
-                            <div class="col-sm-3 text-right col-xs-offset-3 form-group">
-                                <button type="button" class="btn btn-primary btn-lg btn-block">EV to EBITDA</button>
-                            </div>
-                            <div class="col-sm-3 form-group">
-                                <button type="button" class="btn btn-primary btn-lg btn-block">Dividend Yield </button>
-                            </div>
+                                <div class="col-sm-3 text-right col-xs-offset-3 form-group">
+                                    <button type="submit" name="valuation-type" class="btn btn-primary btn-lg btn-block" value="pe">
+                                        Price to Earnings
+                                    </button>
+                                </div>
+                                <div class="col-sm-3 form-group">
+                                    <button type="submit" name="valuation-type" class="btn btn-primary btn-lg btn-block" value="fcfy">
+                                        Free Cash Flow Yield
+                                    </button>
+                                </div>
 
-                            <div class="col-sm-3 text-right col-xs-offset-3 form-group">
-                                <button type="button" class="btn btn-primary btn-lg btn-block">EV to Sales</button>
-                            </div>
-                            <div class="col-sm-3 form-group">
-                                <button type="button" class="btn btn-primary btn-lg btn-block">Sum of the Parts</button>
-                            </div>
+                                <div class="col-sm-3 text-right col-xs-offset-3 form-group">
+                                    <button type="submit" name="valuation-type" class="btn btn-primary btn-lg btn-block" value="evebitda">
+                                        EV to EBITDA
+                                    </button>
+                                </div>
+                                <div class="col-sm-3 form-group">
+                                    <button type="submit" name="valuation-type" class="btn btn-primary btn-lg btn-block" value="dy">
+                                        Dividend Yield
+                                    </button>
+                                </div>
 
-                            <div class="col-sm-6 text-center col-xs-offset-3 form-group">
-                                <button type="button" class="btn btn-primary btn-lg btn-block">Other</button>
-                            </div>
+                                <div class="col-sm-3 text-right col-xs-offset-3 form-group">
+                                    <button type="submit" name="valuation-type" class="btn btn-primary btn-lg btn-block" value="evsales">
+                                        EV to Sales
+                                    </button>
+                                </div>
+                                <div class="col-sm-3 form-group">
+                                    <button type="submit" name="valuation-type" class="btn btn-primary btn-lg btn-block" value="sumparts">
+                                        Sum of the Parts
+                                    </button>
+                                </div>
 
+                                <div class="col-sm-6 text-center col-xs-offset-3 form-group">
+                                    <button type="submit" name="valuation-type" class="btn btn-primary btn-lg btn-block" value="other">
+                                        Other
+                                    </button>
+                                </div>
+                            </form>
                         </div>
                     </div>
                     <!-- /.col -->

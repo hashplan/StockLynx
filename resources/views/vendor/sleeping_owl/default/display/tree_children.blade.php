@@ -15,15 +15,13 @@
 
             <div class="pull-right">
                 @if(is_a($entry, 'App\Model\RosettaTree'))
-
-                    <a href="/admin/valuation/create?stock_id={{$entry->stock_id}}&node_id={{$entry->id}}" class="btn btn-default btn-xs"><span class="fa fa-money"></span> Add valuation</a>
+                    {{--/admin/valuation/create?stock_id={{$entry->stock_id}}&node_id={{$entry->id}}--}}
+                    <a href="/admin/scenario?stock_id={{$entry->stock_id}}&node_id={{$entry->id}}" class="btn btn-default btn-xs"><span class="fa fa-money"></span> Add valuation</a>
                     <a href="/admin/trees/create?stock_id={{$entry->stock_id}}&node_id={{$entry->id}}" class="btn btn-default btn-xs"><span class="fa fa-plus"></span> Add Child</a>
                     <a class="btn btn-default btn-xs" data-toggle="modal" data-target="#node_{{$entry->id}}"><span class="fa fa-search-plus"></span> Details</a>
-
                 @endif
 
                 @foreach ($controls as $control)
-
                     @if($control instanceof \SleepingOwl\Admin\Contracts\ColumnInterface)
                         <?php $control->setModel($entry); ?>
                     @endif

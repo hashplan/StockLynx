@@ -35,13 +35,13 @@ class ValuationTree extends Migration
             $table->string('cash_comment', 300)->nullable();
             $table->enum('debt', array('Current Portion', 'Long-term Portion', 'Minority Interest'))->index();
             $table->string('debt_comment', 300)->nullable();
-            $table->float('ev')->length(20)->nullable();
-            $table->float('mkt_cap')->length(20)->nullable();
+            $table->double('ev',15,2)->nullable();
+            $table->double('mkt_cap',15,2)->nullable();
             $table->integer('diluted_shares')->length(5)->nullable();
             $table->float('discount_rate')->length(3)->nullable();
             $table->string('discount_rate_comment', 300)->nullable();
             $table->integer('discount_days')->length(1)->nullable();
-            $table->float('value_per_share_raw')->length(11)->nullable();
+            $table->double('value_per_share_raw',15,2)->nullable();
             $table->bigInteger('value_per_share_current')->length(11)->nullable();
             $table->string('valuation_comment', 300)->nullable();
         });

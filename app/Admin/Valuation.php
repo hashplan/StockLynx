@@ -46,47 +46,102 @@ AdminSection::registerModel(ValuationTree::class, function (ModelConfiguration $
 
     // Create And Edit
     $model->onCreateAndEdit(function() {
+        $result = [];
+        switch (\Request::get('valuation-type')) {
+            case 'pe': //Price to Earnings
+                $result = [
+                    AdminFormElement::hidden('user_id')->setDefaultValue(Auth::user()->getAttribute('id')),
+                    AdminFormElement::hidden('scenario_id')->setDefaultValue(Auth::user()->getAttribute('id')),
+                    AdminFormElement::hidden('identifier')->setDefaultValue(Auth::user()->getAttribute('id')),
+                    AdminFormElement::hidden('tree_id')->setDefaultValue(\Request::get('node_id')),
+                    AdminFormElement::hidden('level', 'level')->setDefaultValue(\Request::get('node_id')),
+                    AdminFormElement::hidden('scenario_name')->setDefaultValue(\Request::get('node-name')),
+                    AdminFormElement::hidden('scenario_comment')->setDefaultValue(\Request::get('scenario-description')),
+                    AdminFormElement::date('valuation_date', 'Valuation Date')->setCurrentDate(),
+                    AdminFormElement::select('valuation_method', 'Valuation Method', ValuationTree::getPossibleEnumValues('valuation_method')),
+                    AdminFormElement::hidden('metric')->setDefaultValue('EPS'),
+                    AdminFormElement::text('metric_value', 'EPS')->required(),
+                    AdminFormElement::text('metric_comment', 'EPS Comment'),
+                    AdminFormElement::date('valuation_date', 'Valuation Date')->setCurrentDate(),
+//                    AdminFormElement::date('', 'Fiscal Date')->setCurrentDate(),
+//                    AdminFormElement::date('', 'Calendar Date')->setCurrentDate(),
+                    AdminFormElement::text('modifier', 'P|E multiple')->required(),
+                    AdminFormElement::text('modifier_comment', 'P|E multiple Comment'),
+                    AdminFormElement::text('diluted_shares', 'Diluted Shares')->required('to prevent ZERO val!'),
+                    ];
+                break;
+
+            case 'fcfy': //Free Cash Flow Yield
+                $result = [
+                    AdminFormElement::hidden('user_id')->setDefaultValue(Auth::user()->getAttribute('id')),
+                    AdminFormElement::hidden('scenario_id')->setDefaultValue(Auth::user()->getAttribute('id')),
+                    AdminFormElement::hidden('identifier')->setDefaultValue(Auth::user()->getAttribute('id')),
+                    AdminFormElement::hidden('tree_id')->setDefaultValue(\Request::get('node_id')),
+                    AdminFormElement::hidden('level', 'level')->setDefaultValue(\Request::get('node_id')),
+                    AdminFormElement::hidden('scenario_name')->setDefaultValue(\Request::get('node-name')),
+                    AdminFormElement::hidden('scenario_comment')->setDefaultValue(\Request::get('scenario-description')),
+                    AdminFormElement::date('valuation_date', 'Valuation Date')->setCurrentDate(),
+                    AdminFormElement::select('valuation_method', 'Valuation Method', ValuationTree::getPossibleEnumValues('valuation_method')),
+                    AdminFormElement::hidden('metric')->setDefaultValue('Levered FCF'),
+                    AdminFormElement::text('metric_value', 'Levered FCF')->required(),
+                    AdminFormElement::text('metric_comment', 'Levered FCF Comment'),
+                    AdminFormElement::date('valuation_date', 'Valuation Date')->setCurrentDate(),
+//                    AdminFormElement::date('', 'Fiscal Date')->setCurrentDate(),
+//                    AdminFormElement::date('', 'Calendar Date')->setCurrentDate(),
+                    AdminFormElement::text('modifier', 'Yield')->required(),
+                    AdminFormElement::text('modifier_comment', 'Yield Comment'),
+                    AdminFormElement::text('cash', 'Cash'),
+                    AdminFormElement::text('debt', 'Debt'),
+                    AdminFormElement::text('diluted_shares', 'Diluted Shares')->required('to prevent division by ZERO!'),
+                ];
+                break;
+
+            case 'evebitda': //EV to EBITDA
+                $result = [
+                    AdminFormElement::hidden('user_id')->setDefaultValue(Auth::user()->getAttribute('id')),
+                    AdminFormElement::hidden('scenario_id')->setDefaultValue(Auth::user()->getAttribute('id')),
+                    AdminFormElement::hidden('identifier')->setDefaultValue(Auth::user()->getAttribute('id')),
+                    AdminFormElement::hidden('tree_id')->setDefaultValue(\Request::get('node_id')),
+                    AdminFormElement::hidden('level', 'level')->setDefaultValue(\Request::get('node_id')),
+                    AdminFormElement::hidden('scenario_name')->setDefaultValue(\Request::get('node-name')),
+                    AdminFormElement::hidden('scenario_comment')->setDefaultValue(\Request::get('scenario-description')),
+                    AdminFormElement::date('valuation_date', 'Valuation Date')->setCurrentDate(),
+                    AdminFormElement::select('valuation_method', 'Valuation Method', ValuationTree::getPossibleEnumValues('valuation_method')),
+                    AdminFormElement::hidden('metric')->setDefaultValue('EBITDA'),
+                    AdminFormElement::text('metric_value', 'EBITDA')->required(),
+                    AdminFormElement::text('metric_comment', 'EBITDA Comment'),
+                    AdminFormElement::date('valuation_date', 'Valuation Date')->setCurrentDate(),
+//                    AdminFormElement::date('', 'Fiscal Date')->setCurrentDate(),
+//                    AdminFormElement::date('', 'Calendar Date')->setCurrentDate(),
+                    AdminFormElement::text('modifier', 'EBITDA multiple')->required(),
+                    AdminFormElement::text('modifier_comment', 'EBITDA multiple Comment'),
+                    AdminFormElement::text('cash', 'Cash'),
+                    AdminFormElement::text('debt', 'Debt'),
+                    AdminFormElement::text('diluted_shares', 'Diluted Shares')->required('to prevent division by ZERO!'),
+                ];
+                break;
+
+            case 'dy': //Dividend Yield
+                break;
+
+            case 'evsales': //EV to Sales
+                break;
+
+            case 'sumparts': //Sum of the Parts
+                break;
+
+            case 'other': //Other
+                break;
+
+            default:
+                echo 'npm go!';
+        }
+
         $form = AdminForm::panel()
-            ->addBody([
-                AdminFormElement::hidden('user_id')->setDefaultValue(Auth::user()->getAttribute('id')),
-                AdminFormElement::hidden('scenario_id')->setDefaultValue(Auth::user()->getAttribute('id')),
-                AdminFormElement::hidden('identifier')->setDefaultValue(Auth::user()->getAttribute('id')),
-                AdminFormElement::hidden('tree_id')->setDefaultValue(\Request::get('node_id')),
-                //AdminFormElement::select('tree_id', 'Select Node', RosettaTree::own()->lists('name', 'id')->all())->required(),
-                AdminFormElement::select('class', 'Class', ValuationTree::getPossibleEnumValues('class')),//['Equity','Credit','Option']
-                AdminFormElement::select('framework', 'Framework', ValuationTree::getPossibleEnumValues('framework')),//['Fundamental','Merger Arbitrage','Volatility Arbitrage','Distressed','Catalyst']
-//                AdminFormElement::text('level', 'level'),//level of the node
-                AdminFormElement::text('scenario_name', 'Scenario Name')->required(),
-                AdminFormElement::text('scenario_comment', 'Scenario Comment')->required(),//wysiwyg
-                AdminFormElement::select('valuation_method', 'Valuation Method', ValuationTree::getPossibleEnumValues('valuation_method')),//['custom', 'multiple', 'yield']
-                AdminFormElement::date('valuation_date', 'Valuation Date')->setCurrentDate(),
-                AdminFormElement::select('metric', 'Metric', ValuationTree::getPossibleEnumValues('metric')),//['null', 'Net Income', 'EPS', 'EBITDA', 'Revenue', 'Levered FCF', 'Levered FCF per Share', 'Unlevered FCF', 'Dividend per Share']
-                AdminFormElement::text('metric_value', 'Metric Value')->required(),//['null', 'Net Income', 'EPS', 'EBITDA', 'Revenue', 'Levered FCF', 'Levered FCF per Share', 'Unlevered FCF', 'Dividend per Share']
-                AdminFormElement::text('metric_comment', 'Metric Comment'),//wysiwyg
-                //AdminFormElement::select('modifier', 'Modifier', ValuationTree::getPossibleEnumValues('modifier')),//['null', 'multiple', 'yield']
-                AdminFormElement::text('modifier', 'Modifier')->required(),//['null', 'multiple', 'yield']
-                AdminFormElement::text('modifier_comment', 'Modifier Comment'),//wysiwyg
-                AdminFormElement::text('cash', 'Cash'),//Pull from XML , [Allow user override]
-                AdminFormElement::text('cash_comment', 'Cash Comment'),//wysiwyg
-                AdminFormElement::select('debt', 'Debt', ValuationTree::getPossibleEnumValues('debt')),//Pull from XML ['Current Portion', 'Long-term Portion', 'Minority Interest'] , [Allow user override]
-                AdminFormElement::text('debt_comment', 'Debt Comment'),//wysiwyg
-//                AdminFormElement::text('ev', 'EV'),//COMPUTED
-//                AdminFormElement::text('mkt_cap', 'MKT cap'),//COMPUTED
-                AdminFormElement::text('diluted_shares', 'Diluted Shares'),//COMPUTED field 'Shares' from TreeCapitalization table, Based on value/share [Allow user override]
-                AdminFormElement::text('discount_rate', 'Discount Rate %')->setDefaultValue('10'),//Suggest 10%, Pop up suggestion, that this is for Equity - time value
-                AdminFormElement::text('discount_rate_comment', 'Discount Rate Comment'),//wysiwyg
-//                AdminFormElement::text('discount_days', 'Discount Days'),//COMPUTED
-//                AdminFormElement::text('value_per_share_raw', 'value per share raw'),//COMPUTED
-//                AdminFormElement::text('value_per_share_current', 'value_per_share_current'),//COMPUTED
-                AdminFormElement::text('valuation_comment', 'Valuation Comment'),//wysiwyg
-                /***/
-//                AdminFormElement::text('name', 'Title')->required(),
-//                AdminFormElement::wysiwyg('comment', 'Comment')->required(),
-//                AdminFormElement::checkbox('status', 'Status'),
-            ]);
+            ->addBody($result);
 
         $form->getButtons()
-            ->setSaveButtonText('Save Tree')
+            ->setSaveButtonText('Save Valuation')
             ->hideSaveAndCloseButton();
 
         return $form;

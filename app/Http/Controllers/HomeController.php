@@ -47,7 +47,7 @@ class HomeController extends AdminController
 //                    'text'=> [
 //                        'name'=> $valuation['scenario_name']
 //                    ],
-                    'innerHTML' => $valuation['scenario_name'].'<br/>'.trim(str_replace("\r", '', $comment_valuation[0])).'...',
+                    'innerHTML' => '<span class="badge">$ '.$valuation['value_per_share_current'].'</span>'.$valuation['scenario_name'].'<br/>'.trim(str_replace("\r", '', $comment_valuation[0])).'...',
                     'node' => [
                         'HTMLclass' => 'big-bubble-child'
                     ],
@@ -82,7 +82,7 @@ class HomeController extends AdminController
     }
 
     /**
-     * Show the application tree.
+     * Show the application charts.
      *
      * @return \Illuminate\Http\Response
      */
@@ -147,6 +147,16 @@ class HomeController extends AdminController
     public function dashboard()
     {
         return (Auth::check())?((Auth::user()->isManager()||Auth::user()->isSuperAdmin())?$this->renderContent(view('dashboard')):$this->renderContent(view('workspace'))):view('notloggedin');
+    }
+
+    /**
+     * Show the application charts.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function scenario()
+    {
+        return (Auth::check())?$this->renderContent(view('branch')):view('notloggedin');
     }
 
 }

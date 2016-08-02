@@ -16,6 +16,8 @@ Route::get('/tree', ['as' => 'admin.tree', 'uses' => '\App\Http\Controllers\Home
 
 Route::get('/chart', ['as' => 'admin.chart', 'uses' => '\App\Http\Controllers\HomeController@charts']);
 
+Route::get('/scenario', ['as' => 'admin.scenario', 'uses' => '\App\Http\Controllers\HomeController@scenario']);
+
 Route::get('/information', ['as' => 'admin.information', function () {
 	$content = 'You could paste your information here.';
 	return AdminSection::view($content, 'Information');
