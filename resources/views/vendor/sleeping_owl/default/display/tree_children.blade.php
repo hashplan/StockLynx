@@ -97,7 +97,7 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-md-4">Metric:</div>
-                                        <div class="col-md-8">{!! $valuation->metric !!}</div>
+                                        <div class="col-md-8">{!! $valuation->metric_value !!}</div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-4">Metric Comment:</div>
@@ -121,7 +121,7 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-md-4">Debt:</div>
-                                        <div class="col-md-8">{!! $valuation->cash !!}</div>
+                                        <div class="col-md-8">{!! $valuation->debt !!}</div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-4">Debt Comment:</div>
