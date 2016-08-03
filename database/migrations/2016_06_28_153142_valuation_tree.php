@@ -31,9 +31,11 @@ class ValuationTree extends Migration
             //$table->enum('modifier', array('NULL','multiple','yield'))->index();
             $table->float('modifier')->length(30)->index();
             $table->string('modifier_comment', 300)->nullable();
-            $table->bigInteger('cash')->length(20)->unsigned()->nullable();
+            //$table->bigInteger('cash')->length(20)->unsigned()->nullable();
+            $table->double('cash',15,2)->nullable();
             $table->string('cash_comment', 300)->nullable();
-            $table->enum('debt', array('Current Portion', 'Long-term Portion', 'Minority Interest'))->index();
+            //$table->enum('debt', array('Current Portion', 'Long-term Portion', 'Minority Interest'))->index();
+            $table->double('debt',15,2)->nullable();
             $table->string('debt_comment', 300)->nullable();
             $table->double('ev',15,2)->nullable();
             $table->double('mkt_cap',15,2)->nullable();
