@@ -26,7 +26,7 @@ class ValuationTree extends Migration
             $table->enum('valuation_method', array('custom', 'multiple', 'yield'))->index();
             $table->string('valuation_date', 30)->nullable();
             $table->enum('metric', array('NULL','Net Income','EPS','EBITDA','Revenue','Levered FCF','Levered FCF per Share','Unlevered FCF','Dividend per Share'))->index();
-            $table->float('metric_value')->length(30)->index();
+            $table->double('metric_value',15,2)->nullable();
             $table->string('metric_comment', 300)->nullable();
             //$table->enum('modifier', array('NULL','multiple','yield'))->index();
             $table->float('modifier')->length(30)->index();
