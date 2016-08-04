@@ -14,8 +14,8 @@ AdminSection::registerModel(ValuationTree::class, function (ModelConfiguration $
 
         $display->setColumns([
 //            AdminColumn::text('identifier')->setLabel('identifier'),
-            AdminColumn::text('class')->setLabel('class'),
-            AdminColumn::text('framework')->setLabel('framework'),
+//            AdminColumn::text('class')->setLabel('class'),
+//            AdminColumn::text('framework')->setLabel('framework'),
 //            AdminColumn::text('level')->setLabel('level'),
             AdminColumn::text('scenario_name')->setLabel('scenario name'),
 //            AdminColumn::text('scenario_comment')->setLabel('scenario_comment'),
