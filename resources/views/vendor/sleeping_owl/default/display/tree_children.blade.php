@@ -56,7 +56,7 @@
                         <div class="col-md-2">
                             <div class="pull-right">
                             <a class="btn btn-default btn-xs" data-toggle="modal" data-target="#valuation_{{$valuation->id}}"><span class="fa fa-search-plus"></span> Details</a>
-                            <a href="/admin/valuation/{{$valuation->id}}/edit?stock_id={{$entry->stock_id}}&node_id={{$entry->id}}" class="btn btn-default btn-xs"><span class="fa fa-pencil"></span></a>
+                            <a href="/admin/valuation/{{$valuation->id}}/edit?stock_id={{$entry->stock_id}}&node_id={{$entry->id}}&valuation-type={{App\Model\ValuationTree::getTransactValues($valuation->metric)}}" class="btn btn-default btn-xs"><span class="fa fa-pencil"></span></a>
                             <form action="/admin/valuation/{{$valuation->id}}/delete?stock_id={{$entry->stock_id}}" method="POST" style="display:inline-block;">
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                 <input type="hidden" name="_method" value="DELETE">

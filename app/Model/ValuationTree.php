@@ -104,6 +104,42 @@ class ValuationTree extends Model
         return $enum;
     }
 
+    public static function getTransactValues($v){
+        //return strtoupper(str_replace(' ', '_', $v));
+        //'Net Income','EPS','EBITDA','Revenue','Levered FCF','Levered FCF per Share','Unlevered FCF','Dividend per Share'
+        //'NET INCOME','EPS','EBITDA','REVENUE','LEVERED FCF','LEVERED FCF PER SHARE','UNLEVERED FCF','DIVIDEND PER SHARE'
+        $result = 0;
+
+        switch($v){
+            case 'NET_INCOME':
+                $result = 0;
+                break;
+            case 'EPS':
+                $result = 'pe';
+                break;
+            case 'EBITDA':
+                $result = 'evebitda';
+                break;
+            case 'REVENUE':
+                $result = 0;
+                break;
+            case 'LEVERED_FCF':
+                $result = 'fcfy';
+                break;
+            case 'LEVERED_FCF_PER_SHARE':
+                $result = 0;
+                break;
+            case 'UNLEVERED_FCF':
+                $result = 0;
+                break;
+            case 'DIVIDEND_PER_SHARE':
+                $result = 0;
+                break;
+        }
+
+        return $result;
+    }
+
     private static function calculateEV($model){
 
         switch($model->metric){

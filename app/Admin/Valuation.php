@@ -45,9 +45,10 @@ AdminSection::registerModel(ValuationTree::class, function (ModelConfiguration $
     });
 
     // Create And Edit
-    $model->onCreateAndEdit(function() {
+    $model->onCreateAndEdit(function($model) {
         $result = [];
-        switch (\Request::get('valuation-type')) {
+        $vt = (\Request::get('valuation-type'))?\Request::get('valuation-type'):ValuationTree::getTransactValues(ValuationTree::find(\Request::segment(3))->first()->toArray()['metric']);
+        switch ($vt) {
             case 'pe': //Price to Earnings
                 $result = [
                     AdminFormElement::hidden('user_id')->setDefaultValue(Auth::user()->getAttribute('id')),
