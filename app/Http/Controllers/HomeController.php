@@ -47,7 +47,7 @@ class HomeController extends AdminController
 //                    'text'=> [
 //                        'name'=> $valuation['scenario_name']
 //                    ],
-                    'innerHTML' => '<span class="badge">$ '.$valuation['value_per_share_raw'].'</span>'.$valuation['scenario_name'].'<br/>'.trim(str_replace("\r", '', $comment_valuation[0])).'...',
+                    'innerHTML' => '<nobr><span class="badge">$ '.$valuation['value_per_share_raw'].'</span>   '.$valuation['scenario_name'].'</nobr><br/>'.trim(str_replace("\r", '', $comment_valuation[0])).'...',
                     'node' => [
                         'HTMLclass' => 'big-bubble-child'
                     ],
@@ -62,7 +62,7 @@ class HomeController extends AdminController
 //                'text'=> [
 //                    'name'=> $node['name']
 //                ],
-                'innerHTML' => $node['name'].'<br/>'.trim(str_replace("\r", '', $comment_node[0])).'...',
+                'innerHTML' => '<nobr>'.$node['name'].'</nobr><br/>'.trim(str_replace("\r", '', $comment_node[0])).'...',
                 'connectors' => [
                     'style' => [
                         'stroke' => '#000',
