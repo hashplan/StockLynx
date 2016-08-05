@@ -45,7 +45,7 @@ AdminSection::registerModel(ValuationTree::class, function (ModelConfiguration $
     });
 
     // Create And Edit
-    $model->onCreateAndEdit(function($model) {
+    $model->onCreateAndEdit(function() {
         $result = [];
         $vt = (\Request::get('valuation-type'))?\Request::get('valuation-type'):ValuationTree::getTransactValues(ValuationTree::find(\Request::segment(3))->first()->toArray()['metric']);
         switch ($vt) {
