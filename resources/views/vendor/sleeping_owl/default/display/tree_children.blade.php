@@ -16,7 +16,7 @@
             <div class="pull-right">
                 @if(is_a($entry, 'App\Model\RosettaTree'))
                     {{--/admin/valuation/create?stock_id={{$entry->stock_id}}&node_id={{$entry->id}}--}}
-                    @if(is_null(count(App\Model\ValuationTree::byNode($entry->id)->get())) || ('Levered FCF' == App\Model\ValuationTree::byNode($entry->id)->first()->toArray()['metric']))
+                    @if(0 == count(App\Model\ValuationTree::byNode($entry->id)->get()) || ('Levered FCF' == App\Model\ValuationTree::byNode($entry->id)->first()->toArray()['metric']))
                         <a href="/admin/scenario?stock_id={{$entry->stock_id}}&node_id={{$entry->id}}" class="btn btn-default btn-xs"><span class="fa fa-money"></span> Add valuation</a>
                     @endif
                     <a href="/admin/trees/create?stock_id={{$entry->stock_id}}&node_id={{$entry->id}}" class="btn btn-default btn-xs"><span class="fa fa-plus"></span> Add Child</a>
