@@ -47,7 +47,9 @@ class HomeController extends AdminController
 //                    'text'=> [
 //                        'name'=> $valuation['scenario_name']
 //                    ],
-                    'innerHTML' => '<nobr><span class="badge">$ '.$valuation['value_per_share_raw'].'</span>   '.$valuation['scenario_name'].'</nobr><br/>'.trim(str_replace("\r", '', $comment_valuation[0])).'...',
+                    'innerHTML' => '<nobr>'.$valuation['scenario_name'].'</nobr><br/>'.
+                        '<span class="badge">$ '.$valuation['value_per_share_raw'].'</span><br/>'.
+                        '<span class="badge">100%</span><br/><nobr>'.trim(str_replace("\r", '', $comment_valuation[0])).'...</nobr>',
                     'node' => [
                         'HTMLclass' => 'big-bubble-child'
                     ],
