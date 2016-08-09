@@ -106,11 +106,8 @@ class HomeController extends AdminController
      */
     public function tree()
     {
-        if(\Request::get('node_id')){
-            $res = [RosettaTree::own()->stock()->get()->toHierarchy()->toArray()[\Request::get('node_id')]];
-        }else{
-            $res = RosettaTree::own()->stock()->get()->toHierarchy()->toArray();
-        }
+        $res = (\Request::get('node_id'))?[RosettaTree::own()->stock()->get()->toHierarchy()->toArray()[\Request::get('node_id')]]:RosettaTree::own()->stock()->get()->toHierarchy()->toArray();
+
         $R = [
                 'chart' => [
                     'container' => '#collapsable',
