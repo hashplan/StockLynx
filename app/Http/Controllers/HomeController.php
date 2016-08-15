@@ -49,7 +49,7 @@ class HomeController extends AdminController
 //                    ],
                     'innerHTML' => '<nobr>'.$valuation['scenario_name'].'</nobr><br/>'.
                         '<span class="badge">$ '.$valuation['value_per_share_raw'].'</span><br/>'.
-                        '<span class="badge">100%</span><br/><nobr>'.trim(str_replace("\r", '', $comment_valuation[0])).'...</nobr>',
+                        '<span class="badge">% '.$valuation['percentage'].'</span><br/><nobr>'.trim(str_replace("\r", '', $comment_valuation[0])).'...</nobr>',
                     'node' => [
                         'HTMLclass' => 'big-bubble-child'
                     ],
@@ -135,6 +135,7 @@ class HomeController extends AdminController
                     'children' => self::generateNodeStructure($res)
                 ]
         ];
+
         $result = 'var chart_config = '.json_encode($R).';';
         return (Auth::check())?$this->renderContent(view('tree')->with('chart_config', $result)):view('notloggedin');
     }

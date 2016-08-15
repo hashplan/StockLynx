@@ -22,6 +22,7 @@ class ValuationTree extends Model
         'scenario_comment',
         'valuation_method',
         'valuation_date',
+        'percentage',
         'metric',
         'metric_value',
         'metric_comment',
@@ -50,6 +51,19 @@ class ValuationTree extends Model
     public function scopeByNode($query, $nodeId)
     {
         $query->where('tree_id', $nodeId);
+    }
+
+    public static function countNodePercentage($nodeId)
+    {
+        $res = 0.0;
+
+        $val = self::byNode($nodeId)->get();
+
+        foreach($val as $v) {
+            $res += $v->percentage;
+        }
+
+        return 100.0-$res;
     }
 
     public static function boot()
@@ -105,12 +119,13 @@ class ValuationTree extends Model
     }
 
     public static function getTransactValues($v){
+
         //return strtoupper(str_replace(' ', '_', $v));
         //'Net Income','EPS','EBITDA','Revenue','Levered FCF','Levered FCF per Share','Unlevered FCF','Dividend per Share'
         //'NET INCOME','EPS','EBITDA','REVENUE','LEVERED FCF','LEVERED FCF PER SHARE','UNLEVERED FCF','DIVIDEND PER SHARE'
         $result = 0;
 
-        switch($v){
+        switch(strtoupper(str_replace(' ', '_', $v))){
             case 'NET_INCOME':
                 $result = 0;
                 break;
