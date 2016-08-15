@@ -48,6 +48,7 @@ AdminSection::registerModel(ValuationTree::class, function (ModelConfiguration $
     $model->onCreateAndEdit(function() {
         $result = [];
         $vt = (\Request::get('valuation-type'))?\Request::get('valuation-type'):ValuationTree::getTransactValues(ValuationTree::find(\Request::segment(3))->first()->toArray()['metric']);
+        Request::merge(['_redirectBack' => '/admin/tree?stock_id='.\Request::get('stock_id')]);
         switch ($vt) {
             case 'pe': //Price to Earnings
                 $result = [
@@ -73,7 +74,6 @@ AdminSection::registerModel(ValuationTree::class, function (ModelConfiguration $
                 break;
 
             case 'fcfy': //Free Cash Flow Yield
-                Request::merge(['_redirectBack' => '/admin/tree?stock_id='.\Request::get('stock_id')]);
                 $result = [
                     AdminFormElement::hidden('user_id')->setDefaultValue(Auth::user()->getAttribute('id')),
                     AdminFormElement::hidden('scenario_id')->setDefaultValue(Auth::user()->getAttribute('id')),
