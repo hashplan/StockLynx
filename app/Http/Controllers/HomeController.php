@@ -64,7 +64,7 @@ class HomeController extends AdminController
 //                'text'=> [
 //                    'name'=> $node['name']
 //                ],
-                'innerHTML' => '<nobr>'.$node['name'].'</nobr><br/>'.trim(str_replace("\r", '', $comment_node[0])).'...',
+                'innerHTML' => '<nobr>'.$node['name'].'</nobr><br/><nobr>'.trim(str_replace("\r", '', $comment_node[0])).'...</nobr>',
                 'connectors' => [
                     'style' => [
                         'stroke' => '#000',
