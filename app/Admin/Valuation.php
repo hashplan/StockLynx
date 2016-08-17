@@ -48,7 +48,7 @@ AdminSection::registerModel(ValuationTree::class, function (ModelConfiguration $
     $model->onCreateAndEdit(function() {
         $result = [];
         $vt = (\Request::get('valuation-type'))?\Request::get('valuation-type'):ValuationTree::getTransactValues(ValuationTree::find(\Request::segment(3))->first()->toArray()['metric']);
-        Request::merge(['_redirectBack' => '/admin/tree?stock_id='.\Request::get('stock_id')]);
+        Request::merge(['_redirectBack' => '/admin/trees?stock_id='.\Request::get('stock_id')]);
         switch ($vt) {
             case 'pe': //Price to Earnings
                 $result = [
