@@ -82,7 +82,7 @@ AdminSection::registerModel(ValuationTree::class, function (ModelConfiguration $
                     AdminFormElement::hidden('level', 'level')->setDefaultValue(\Request::get('node_id')),
                     AdminFormElement::hidden('scenario_name')->setDefaultValue(\Request::get('node-name')),
                     AdminFormElement::hidden('scenario_comment')->setDefaultValue(\Request::get('scenario-description')),
-                    AdminFormElement::text('percentage', 'percent % of the node')->required()->setDefaultValue(ValuationTree::countNodePercentage(\Request::get('node_id'))),
+                    AdminFormElement::text('percentage', 'Probability % of the node')->required()->setDefaultValue(ValuationTree::countNodePercentage(\Request::get('node_id'))),
                     AdminFormElement::date('valuation_date', 'Valuation Date')->setCurrentDate(),
                     AdminFormElement::select('valuation_method', 'Valuation Method', ValuationTree::getPossibleEnumValues('valuation_method')),
                     AdminFormElement::hidden('metric')->setDefaultValue('Levered FCF'),

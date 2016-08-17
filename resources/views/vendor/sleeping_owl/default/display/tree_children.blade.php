@@ -114,7 +114,7 @@
                                         <div class="col-md-8">{!! $valuation->modifier_comment !!}</div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-md-4">Percentage:</div>
+                                        <div class="col-md-4">Probability:</div>
                                         <div class="col-md-8">{!! $valuation->percentage !!}</div>
                                     </div>
                                     <div class="row">
