@@ -48,12 +48,13 @@
             @foreach(App\Model\ValuationTree::byNode($entry->id)->get() as $valuation)
                 <li class="list-group-item">
                     <div class="row">
-                        <div class="col-md-5 pull-left"><span class="fa fa-money"></span>&nbsp;&nbsp;&nbsp;{{$valuation->scenario_name}}</div>
+                        <div class="col-md-4 pull-left"><span class="fa fa-money"></span>&nbsp;&nbsp;&nbsp;{{$valuation->scenario_name}}</div>
                         <div class="col-md-1">{{$valuation->class}}</div>
                         <div class="col-md-1">{{$valuation->framework}}</div>
                         <div class="col-md-1">{{$valuation->valuation_method}}</div>
                         <div class="col-md-1">{{$valuation->metric}}</div>
                         <div class="col-md-1">{{$valuation->modifier}}</div>
+                        <div class="col-md-1">{{$valuation->percentage}}</div>
                         <div class="col-md-2">
                             <div class="pull-right">
                             <a class="btn btn-default btn-xs" data-toggle="modal" data-target="#valuation_{{$valuation->id}}"><span class="fa fa-search-plus"></span> Details</a>
@@ -111,6 +112,10 @@
                                     <div class="row">
                                         <div class="col-md-4">Modifier Comment:</div>
                                         <div class="col-md-8">{!! $valuation->modifier_comment !!}</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4">Percentage:</div>
+                                        <div class="col-md-8">{!! $valuation->percentage !!}</div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-4">Cash:</div>
