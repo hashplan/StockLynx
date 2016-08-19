@@ -40,8 +40,11 @@ class HomeController extends AdminController
                 $childrens = self::generateNodeStructure($node['children']);
             }
 
+            $probability = 0;
+
             foreach(ValuationTree::own()->byNode($node['id'])->get()->toArray() as $valuation) {
                 //$comment_valuation = explode(PHP_EOL, $valuation['scenario_comment']);
+                $probability += $valuation['percentage'] * $valuation['value_per_share_raw'] / 100;
                 $comment_valuation = explode(' ', trim($valuation['scenario_comment']));
                 $c[] = [
 //                    'text'=> [
@@ -64,7 +67,7 @@ class HomeController extends AdminController
 //                'text'=> [
 //                    'name'=> $node['name']
 //                ],
-                'innerHTML' => '<nobr>'.$node['name'].'</nobr><br/><nobr>'.trim(str_replace("\r", '', $comment_node[0])).'...</nobr>',
+                'innerHTML' => '<span class="badge">$ '.$probability.'</span><br/><nobr>'.$node['name'].'</nobr><br/><nobr>'.trim(str_replace("\r", '', $comment_node[0])).'...</nobr>',
                 'connectors' => [
                     'style' => [
                         'stroke' => '#000',
