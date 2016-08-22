@@ -14,8 +14,8 @@ return [
         'since' => 'Registered at :date',
     ],
     'model' => [
-        'create' => 'Create in section :title',
-        'edit' => 'Update in section :title',
+        'create' => 'Create new :title',
+        'edit' => 'Update new :title',
     ],
     'links' => [
         'index_page' => '',//To site
@@ -37,7 +37,7 @@ return [
         ],
     ],
     'table' => [
-        'new-entry' => 'New Entry',
+        'new-entry' => 'New Tree',
         'edit' => 'Edit',
         'restore' => 'Restore',
         'delete' => 'Delete',

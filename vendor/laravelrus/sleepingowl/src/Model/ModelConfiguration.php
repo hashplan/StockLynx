@@ -247,7 +247,7 @@ class ModelConfiguration
     public function getCreateTitle()
     {
         if (is_null($this->createTitle)) {
-            return trans('sleeping_owl::lang.model.create', ['title' => $this->getTitle()]);
+            return trans('lang.model.create', ['title' => $this->getTitle()]);
         }
 
         return $this->createTitle;
@@ -271,7 +271,7 @@ class ModelConfiguration
     public function getEditTitle()
     {
         if (is_null($this->editTitle)) {
-            return trans('sleeping_owl::lang.model.edit', ['title' => $this->getTitle()]);
+            return trans('lang.model.edit', ['title' => $this->getTitle()]);
         }
 
         return $this->editTitle;
