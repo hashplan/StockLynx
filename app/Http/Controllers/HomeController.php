@@ -31,6 +31,12 @@ class HomeController extends AdminController
 
         $res = [];
 
+        $cc = [];
+
+        foreach(RosettaTree::allLeaves()->own()->stock()->get(['id'])->toArray() as $v) {
+            $cc[] = $v['id'];
+        }
+
         foreach($tree as $node) {
 
             $c = [];
@@ -67,7 +73,7 @@ class HomeController extends AdminController
 //                'text'=> [
 //                    'name'=> $node['name']
 //                ],
-                'innerHTML' => '<span class="badge">$ '.$probability.'</span><br/><nobr>'.$node['name'].'</nobr><br/><nobr>'.trim(str_replace("\r", '', $comment_node[0])).'...</nobr>',
+                'innerHTML' => (in_array($node['id'], $cc))?'<span class="badge">$ '.self::calculateProbability($cc, $node['id']).'</span>':'<span class="badge">$ '.self::calculateProbability($cc).'</span><br/><nobr>'.$node['name'].'</nobr><br/><nobr>'.trim(str_replace("\r", '', $comment_node[0])).'...</nobr>',
                 'connectors' => [
                     'style' => [
                         'stroke' => '#000',
@@ -84,6 +90,23 @@ class HomeController extends AdminController
         }
 
         return $res;
+    }
+
+    private static function calculateProbability($cc, $node_id = 0){
+        $probability = 0;
+        if(0 == $node_id){
+            foreach($cc as $c) {
+                foreach (ValuationTree::own()->byNode($c)->get()->toArray() as $valuation) {
+                    $probability += $valuation['percentage'] * $valuation['value_per_share_raw'] / 100;
+                }
+            }
+        }else{
+            foreach (ValuationTree::own()->byNode($node_id)->get()->toArray() as $valuation) {
+                $probability += $valuation['percentage'] * $valuation['value_per_share_raw'] / 100;
+            }
+        }
+
+        return $probability;
     }
 
     /**
@@ -138,7 +161,7 @@ class HomeController extends AdminController
                     'children' => self::generateNodeStructure($res)
                 ]
         ];
-
+//dd('<span class="badge">$ 100</span>'.self::generateNodeStructure($res)[0]['innerHTML']);
         $result = 'var chart_config = '.json_encode($R).';';
         return (Auth::check())?$this->renderContent(view('tree')->with('chart_config', $result)):view('notloggedin');
     }
