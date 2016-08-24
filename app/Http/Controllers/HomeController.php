@@ -73,7 +73,7 @@ class HomeController extends AdminController
 //                'text'=> [
 //                    'name'=> $node['name']
 //                ],
-                'innerHTML' => (in_array($node['id'], $cc))?'<span class="badge">$ '.self::calculateProbability($cc, $node['id']).'</span>':'<span class="badge">$ '.self::calculateProbability($cc).'</span><br/><nobr>'.$node['name'].'</nobr><br/><nobr>'.trim(str_replace("\r", '', $comment_node[0])).'...</nobr>',
+                'innerHTML' => (in_array($node['id'], $cc))?''/*'<span class="badge">$ '.self::calculateProbability($cc, $node['id']).'</span>'*/:'<span class="badge">$ '.self::calculateProbability($cc).'</span><br/><nobr>'.$node['name'].'</nobr><br/><nobr>'.trim(str_replace("\r", '', $comment_node[0])).'...</nobr>',
                 'connectors' => [
                     'style' => [
                         'stroke' => '#000',
