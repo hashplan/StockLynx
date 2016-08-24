@@ -43,12 +43,17 @@ AdminSection::registerModel(ValuationTree::class, function (ModelConfiguration $
 
         return $display;
     });
-
     // Create And Edit
     $model->onCreateAndEdit(function() {
         $result = [];
-        $vt = (\Request::get('valuation-type'))?\Request::get('valuation-type'):ValuationTree::getTransactValues(ValuationTree::find(\Request::segment(3))->first()->toArray()['metric']);
-        Request::merge(['_redirectBack' => '/admin/trees?stock_id='.\Request::get('stock_id')]);
+//        dd((parse_url(url()->previous())['path']));
+//        dd(('/admin/valuation' == parse_url(url()->previous())['path']));
+//        dd(('/admin/valuation' == parse_url(url()->previous())['path'])?'/admin/valuation':'/admin/trees?stock_id='.\Request::get('stock_id'));
+//        dd(Request::merge(['_redirectBack' => ('/admin/valuation' == parse_url(url()->previous())['path'])?'/admin/valuation':'/admin/trees?stock_id='.\Request::get('stock_id')]));
+//        dd((0 == strcasecmp('/admin/valuation', parse_url(url()->previous())['path'])));
+        Request::merge(['_redirectBack' => (0 == strcasecmp('/admin/valuation', parse_url(url()->previous())['path']))?'/admin/valuation':'/admin/trees?stock_id='.\Request::get('stock_id')]);
+        $vt = (\Request::has('valuation-type'))?\Request::get('valuation-type'):ValuationTree::getTransactValues(ValuationTree::find(\Request::segment(3))->first()->toArray()['metric']);
+//        dd(Request::all());
         switch ($vt) {
             case 'pe': //Price to Earnings
                 $result = [
