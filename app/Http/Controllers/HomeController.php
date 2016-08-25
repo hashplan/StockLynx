@@ -77,8 +77,8 @@ class HomeController extends AdminController
                 'connectors' => [
                     'style' => [
                         'stroke' => '#000',
-                        'arrow-end' => 'block-wide-long',
-                        'arrow-start' => 'oval-wide-long',
+                        //'arrow-end' => (in_array($node['id'], $cc))?'':'classic-wide-long',//'block-wide-long',
+                        //'arrow-start' => (in_array($node['id'], $cc))?'':'classic-wide-long',//'oval-wide-long',
                     ],
                 ],
                 'node' => [

@@ -209,7 +209,7 @@ class ValuationTree extends Model
                 $result = $model->metric_value * $model->modifier - $model->debt + $model->cash;
                 break;
             case 'Levered FCF':
-                $result = $model->metric_value / $model->modifier / 100;
+                $result = $model->metric_value / $model->modifier;
                 break;
             case 'Levered FCF per Share':
                 $result = $model->metric_value / $model->modifier * $model->diluted_shares;
